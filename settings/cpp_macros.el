@@ -55,6 +55,9 @@
   '("Insert Header" . insert-header))
 
 
+;; Set the tab size to 4, same as indent size
+(setq tab-width 4)
+
 
 ;;;;;;;;;
 ;; OLD ;;
