@@ -46,6 +46,9 @@
 ;;;;;;;;;
 (load-file "~/.emacs.d/settings/ssh.el")
 
-
+;;;;;;;;;;;
+;; CMAKE ;;
+;;;;;;;;;;;
+(load-file "~/.emacs.d/settings/cmake.el")
 
 
