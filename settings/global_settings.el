@@ -41,3 +41,16 @@
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; USE IDO FOR BUFFER CHANGE ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'ido)
+(ido-mode t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; COPY TO AND FROM REGISTER ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "\C-x x") 'copy-to-register)
+(global-set-key (kbd "\C-x g") 'insert-register)
