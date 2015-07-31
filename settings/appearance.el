@@ -7,7 +7,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;   you can get the font currently using by M-x describe-font
 ;; (set-face-font 'default "-misc-fixed-medium-r-normal--13-*-*-*-c-70-iso8859-1")
-
+;;
+;; Nicer font
+(setq default-frame-alist '((font . "Inconsolata-11")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; REMOVE THE TOOL BAR ;;
@@ -31,3 +33,28 @@
   (interactive)
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
+
+
+;;;;;;;;;;;;;;;;;
+;; Color-Theme ;;
+;;;;;;;;;;;;;;;;;
+;;;; color-theme-solarized
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/emacs-color-theme-solarized")
+;; (load-theme 'solarized t)
+;;
+;;;; color-theme-sanityinc-tomorrow
+(add-to-list 'load-path "~/.emacs.d/elpa/color-theme-sanityinc-tomorrow-20150710.1903")
+(require 'color-theme-sanityinc-tomorrow)
+(load-theme 'sanityinc-tomorrow-night t)
+;;
+;;;; grandshell-theme
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/grandshell-theme-20150404.501")
+;; (load-theme 'grandshell t)
+;;
+;;;; cobalt-theme
+;;;; from: http://emacsthemes.caisah.info/cobalt-theme/
+;; (add-to-list 'load-path "~/.emacs.d/elpa/color-theme-20080305.34")
+;; (require 'color-theme)
+;; (color-theme-initialize)
+;; (load-file "~/.emacs.d/plugins/cobalt-theme/color-theme-cobalt.el")
+;; (color-theme-cobalt)
