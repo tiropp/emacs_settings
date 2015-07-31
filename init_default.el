@@ -20,6 +20,11 @@
 ;;;;;;;;;;;;;;;;;;;;;
 (load-file "~/.emacs.d/settings/global_settings.el")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GENERAL PROGRAMMING SETTINGS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(load-file "~/.emacs.d/settings/programming.el")
+
 ;;;;;;;;;
 ;; C++ ;;
 ;;;;;;;;;
