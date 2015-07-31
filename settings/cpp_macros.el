@@ -34,28 +34,31 @@
     )
   )
 
-;; Key map
-(define-key c-mode-base-map [(control n) (h)] 'cpp-insert-section-header)
-(define-key c-mode-base-map [(control n) (n)] 'cpp-insert-namespace)
-(define-key c-mode-base-map [(control n) (g)] 'cpp-insert-header-guard)
+(defun cpp-macro-keys()
+  "Setup C++ macro keys and menus"
+  ;; Key map
+  (define-key c-mode-base-map [(control n) (h)] 'cpp-insert-section-header)
+  (define-key c-mode-base-map [(control n) (n)] 'cpp-insert-namespace)
+  (define-key c-mode-base-map [(control n) (g)] 'cpp-insert-header-guard)
 
-
-;; Creating a new menu pane 'C++2' in the menu bar
-(let ((menuMap (make-sparse-keymap "C++2")))  
-  (define-key c-mode-base-map [menu-bar cpp_2] (cons "C++2" menuMap))
-  (define-key menuMap [ih]
-    '("Insert Section Header" . cpp-insert-section-header))
-  (define-key menuMap [in]
-    '("Insert Namespace" . cpp-insert-namespace))
-  (define-key menuMap [ig]
-    '("Insert Header Guard" . cpp-insert-header-guard)))
-    
+  ;; Creating a new menu pane 'C++2' in the menu bar
+  (let ((menuMap (make-sparse-keymap "C++2")))  
+    (define-key c-mode-base-map [menu-bar cpp_2] (cons "C++2" menuMap))
+    (define-key menuMap [ih]
+      '("Insert Section Header" . cpp-insert-section-header))
+    (define-key menuMap [in]
+      '("Insert Namespace" . cpp-insert-namespace))
+    (define-key menuMap [ig]
+      '("Insert Header Guard" . cpp-insert-header-guard)))
+  )
 
 (add-hook 'c-mode-common-hook
 	  ;; Set the tab size to 4, same as indent size
 	  (lambda()
 	    (setq tab-width 4)
-	    ))
+	    (cpp-macro-keys)
+	    )
+	  )
 
 ;;;;;;;;;
 ;; OLD ;;
