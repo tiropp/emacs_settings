@@ -53,8 +53,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; USE IDO FOR BUFFER CHANGE ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'ido)
-(ido-mode t)
+;; Use helm instead of ido now
+;(require 'ido)
+;(ido-mode t)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -88,21 +90,6 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/undo-tree-20140509.522")
 (require 'undo-tree)
 
-
-;;;;;;;;;;;;;;;
-;; Yasnippet ;;
-;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20150415.244")
-(require 'yasnippet)
-(yas-global-mode 1)
-
-
-;;;;;;;;;;;;;
-;; Company ;;
-;;;;;;;;;;;;;
-;; Company is a modular completion mechanism.  Modules for retrieving completion
-;; candidates are called back-ends, modules for displaying them are front-ends.
-(add-hook 'after-init-hook 'global-company-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;
