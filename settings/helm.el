@@ -2,8 +2,8 @@
 ;; Initial version taken from
 ;;    https://github.com/tuhdo/emacs-c-ide-demo
 ;;
-(add-to-list 'load-path "~/.emacs.d/elpa/helm-core-20150728.1251")
-(add-to-list 'load-path "~/.emacs.d/elpa/helm-20150727.1011")
+(add-to-list 'load-path "~/.emacs.d/elpa/helm-core-20150803.1433")
+(add-to-list 'load-path "~/.emacs.d/elpa/helm-20150802.2312")
 (require 'helm-config)
 (require 'helm-grep)
 

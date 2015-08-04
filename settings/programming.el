@@ -58,8 +58,8 @@
 ;; Magit is an interface to the version control system Git,
 ;; implemented as an Emacs package.  Magit aspires to be a complete
 ;; Git porcelain.
-(add-to-list 'load-path "~/.emacs.d/elpa/magit-20150730.1911")
-(add-to-list 'load-path "~/.emacs.d/elpa/dash-20141220.1452")
+(add-to-list 'load-path "~/.emacs.d/elpa/magit-20150803.337")
+(add-to-list 'load-path "~/.emacs.d/elpa/dash-20150717.1321")
 (add-to-list 'load-path "~/.emacs.d/elpa/with-editor-20150710.252")
 (add-to-list 'load-path "~/.emacs.d/elpa/git-commit-20150727.1401")
 (add-to-list 'load-path "~/.emacs.d/elpa/magit-popup-20150730.1344")
@@ -88,7 +88,7 @@
 ;; Flycheck ;;
 ;;;;;;;;;;;;;;
 ;; On-the-fly syntax checking for GNU Emacs 24.
-(add-to-list 'load-path "~/.emacs.d/elpa/flycheck-20150730.101")
+(add-to-list 'load-path "~/.emacs.d/elpa/flycheck-20150802.212")
 (require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
@@ -132,7 +132,7 @@
 ;;;;;;;;;;;;;;;
 ;; Yasnippet ;;
 ;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20150415.244")
+(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20150803.1124")
 (require 'yasnippet)
 (yas-global-mode 1)
 

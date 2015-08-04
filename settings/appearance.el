@@ -43,7 +43,7 @@
 ;; (load-theme 'solarized t)
 ;;
 ;;;; color-theme-sanityinc-tomorrow
-(add-to-list 'load-path "~/.emacs.d/elpa/color-theme-sanityinc-tomorrow-20150710.1903")
+(add-to-list 'load-path "~/.emacs.d/elpa/color-theme-sanityinc-tomorrow-20150803.1419")
 (require 'color-theme-sanityinc-tomorrow)
 (load-theme 'sanityinc-tomorrow-night t)
 ;;
