@@ -173,3 +173,8 @@
 (define-key 'help-command (kbd "h m") 'discover-my-major)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;
+;; MOUSE BUFFER MENU ;;
+;;;;;;;;;;;;;;;;;;;;;;;
+(require 'msb)
+(msb-mode)
