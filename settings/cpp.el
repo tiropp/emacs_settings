@@ -11,7 +11,7 @@
 (defun my-c-mode-config()
   (define-key c-mode-base-map (kbd "\C-c\C-v")   'uncomment-region)
   ;; backtab = shift-tab
-  (define-key c-mode-base-map (kbd "<backtab>")  'complete-symbol)
+  ;; (define-key c-mode-base-map (kbd "<backtab>")  'complete-symbol)
   )
 
 ;; (add-hook 'c-mode-common-hook 'c-mode-config)
@@ -47,4 +47,8 @@
 )
 
 ;; Open .h file in c++ mode
-;; (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;; The access lables (private, protected, public) shall be indented with
+;; (4-2 = 2) spaces.
+(c-set-offset 'access-label -2)
