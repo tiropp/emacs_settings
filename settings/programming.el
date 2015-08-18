@@ -98,10 +98,10 @@
 
 ;; The errors are now displayed by popup, instead of printing into the echo
 ;; area.
-(add-to-list 'load-path "~/.emacs.d/elpa/flycheck-tip-20150726.156")
-(add-to-list 'load-path "~/.emacs.d/elpa/popup-20150626.711")
-(require 'flycheck-tip)
-(flycheck-tip-use-timer 'verbose)
+; (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-tip-20150726.156")
+; (add-to-list 'load-path "~/.emacs.d/elpa/popup-20150626.711")
+; (require 'flycheck-tip)
+; (flycheck-tip-use-timer 'verbose)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
