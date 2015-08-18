@@ -88,9 +88,12 @@
 ;; Flycheck ;;
 ;;;;;;;;;;;;;;
 ;; On-the-fly syntax checking for GNU Emacs 24.
-(add-to-list 'load-path "~/.emacs.d/elpa/flycheck-20150802.212")
-(require 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;;
+;; NB: Flycheck and/or popup causes emacs to crash on Win32
+;;
+; (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-20150802.212")
+; (require 'flycheck)
+; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 ;; The errors are now displayed by popup, instead of printing into the echo
