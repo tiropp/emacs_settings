@@ -157,8 +157,9 @@
 ;; Use tab for completation for C(++)
 (add-hook 'c-mode-common-hook
 	  (lambda()
-	    (define-key c-mode-map  [(tab)] 'company-complete)
-	    (define-key c++-mode-map  [(tab)] 'company-complete)
+	    ;; backtab = shift-tab
+	    (define-key c-mode-map  [(backtab)] 'company-complete)
+	    (define-key c++-mode-map  [(backtab)] 'company-complete)
 	    ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
