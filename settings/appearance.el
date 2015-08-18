@@ -9,7 +9,12 @@
 ;; (set-face-font 'default "-misc-fixed-medium-r-normal--13-*-*-*-c-70-iso8859-1")
 ;;
 ;; Nicer font
-(setq default-frame-alist '((font . "Inconsolata-11")))
+(if (eq system-type 'gnu/linux)
+    (progn 
+      (setq default-frame-alist '((font . "Inconsolata-11")))
+      ))
+;; NB: If font is not installed, emacs may crash. This was observed under Windwos.
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; REMOVE THE TOOL BAR ;;
