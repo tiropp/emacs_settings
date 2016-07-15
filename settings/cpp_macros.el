@@ -16,13 +16,20 @@
 (defun cpp-insert-namespace(name)
   "Insert namespace snippet"
   (interactive "sNamespace: ")
-  (insert "namespace " name " {\n")
-  (indent-according-to-mode)
-  (let ((pos (point)))
-    (insert "\n} // End namespace " name)
-    (goto-char pos)
-    )
-  )
+  (if (> (length name) 0)
+      (progn
+	(insert "namespace " name " {\n")
+	(indent-according-to-mode)
+	(let ((pos (point)))
+	   (insert "\n} // End namespace " name)
+	   (goto-char pos)
+	   ))
+    (progn
+      (insert "namespace {\n")
+      (let ((pos (point)))
+	(insert "\n} // End unnamed namespace ")
+	(goto-char pos)
+	))))
 
 (defun cpp-insert-header-guard(name)
   "Insert header guard"
