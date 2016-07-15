@@ -3,7 +3,7 @@
 ;;
 (defun cpp-insert-section-header(name)
   "Insert a code section header into c++ code"
-  (interactive "sName: ")
+  (interactive "sSection: ")
   (let ((n (length name)))
     (let (( s1 (concat  "/****" (make-string n ?*) "****/\n") ))
 	 (indent-according-to-mode)(insert s1)
@@ -15,7 +15,7 @@
 
 (defun cpp-insert-namespace(name)
   "Insert namespace snippet"
-  (interactive "sName: ")
+  (interactive "sNamespace: ")
   (insert "namespace " name " {\n")
   (indent-according-to-mode)
   (let ((pos (point)))
@@ -26,7 +26,7 @@
 
 (defun cpp-insert-header-guard(name)
   "Insert header guard"
-  (interactive "sName: ")
+  (interactive "sHeader guard: ")
   (beginning-of-line)(insert "#ifndef " name "\n#define " name "\n\n")
   (let ((pos (point)))
     (insert "\n\n#endif  // " name "\n")
