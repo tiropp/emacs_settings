@@ -4,7 +4,7 @@
 ;; (load-file "~/.emacs.d/settings/cedet_helm.el")
 (load-file "~/.emacs.d/settings/helm.el")
 ;; Use ggtags via helm instead of directly
-;; (load-file "~/.emacs.d/settings/ggtags.el")
+;; (load-file "~/.emacs.d/settings/ggtags.
 (load-file "~/.emacs.d/settings/helm-gtags.el")
 
 
