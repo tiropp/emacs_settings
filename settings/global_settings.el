@@ -78,18 +78,22 @@
 ;; All of highlights made by this library will be removed
 ;; when any new command is executed.
 ;;
-(add-to-list 'load-path "~/.emacs.d/elpa/volatile-highlights-20141004.2240")
-(require 'volatile-highlights)
-(volatile-highlights-mode t)
+(use-package volatile-highlights
+   :ensure t
+   :config
+   (require 'volatile-highlights)
+   (volatile-highlights-mode t))   
 
 
 ;;;;;;;;;;;;;;;
 ;; Undo-Tree ;;
 ;;;;;;;;;;;;;;;
 ;; Use undo-tree-visualize to see the undo tree in a separated buffer.
-(add-to-list 'load-path "~/.emacs.d/elpa/undo-tree-20140509.522")
-(require 'undo-tree)
-
+(use-package undo-tree
+   :ensure t
+   :config
+   (require 'undo-tree)
+)	     
 
 
 ;;;;;;;;;;;;;;;;;;;
@@ -98,9 +102,9 @@
 ;; Expand region increases the selected region by semantic units. Just keep
 ;; pressing the key until it selects what you want.
 ;;
-(add-to-list 'load-path "~/.emacs.d/elpa/expand-region-20150718.18")
-(require 'expand-region)
-(global-set-key (kbd "M-m") 'er/expand-region)
+(use-package expand-region
+   :ensure t
+   :bind (("M-m" . er/expand-region)))   
 
 
 ;;;;;;;;;;
@@ -112,10 +116,15 @@
 ;;
 ;; only turn on if a window system is available
 ;; this prevents error under terminal that does not support X
-(add-to-list 'load-path "~/.emacs.d/elpa/nyan-mode-20150128.1218")
-(require 'nyan-mode)
-(case window-system
-  ((x w32) (nyan-mode)))
+(use-package nyan-mode
+   :ensure t
+   :config
+   (case window-system
+	 ((x w32) (nyan-mode))))
+;(add-to-list 'load-path "~/.emacs.d/elpa/nyan-mode-20150128.1218")
+;(require 'nyan-mode)
+;(case window-system
+;  ((x w32) (nyan-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;
@@ -166,11 +175,16 @@
 ;; Discover-My-Major ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Discover key bindings and their meaning for the current Emacs major mode
-(add-to-list 'load-path "~/.emacs.d/elpa/discover-my-major-20140510.1007")
-(add-to-list 'load-path "~/.emacs.d/elpa/makey-20131231.630")
-(require 'discover-my-major)
-(global-unset-key (kbd "C-h h"))        ; original "C-h h" displays "hello world" in different languages
-(define-key 'help-command (kbd "h m") 'discover-my-major)
+(use-package discover-my-major
+   :ensure t
+   :init
+   (global-unset-key (kbd "C-h h"))  ; original "C-h h" displays "hello world" in different languages
+   :config
+   (define-key 'help-command (kbd "h m") 'discover-my-major)
+   )
+(use-package makey
+   :ensure t
+   )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;

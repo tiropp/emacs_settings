@@ -1,3 +1,5 @@
+(load-file "~/.emacs.d/settings/usepackage.el")
+
 ;;;;;;;;;;;
 ;; CEDET ;;
 ;;;;;;;;;;;
@@ -5,9 +7,7 @@
 ;; cedet needs with a different version. It is quite picky!
 ;;
 ;; Use gtags instead of cedet for code completion
-; (load-file "~/.emacs.d/settings/cedet.el")
-
-
+;; (load-file "~/.emacs.d/settings/cedet.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; GLOBAL SHORT CUTS ;;

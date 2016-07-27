@@ -29,11 +29,14 @@
 
 
 ;; Add column 80 marker
-(add-to-list 'load-path "~/.emacs.d/column-marker")
-(require 'column-marker)
-(add-hook 'c-mode-common-hook (lambda () (interactive) (column-marker-3 80)))
+;;
 ;; Use C-c m to set a new marker position
 ;; (global-set-key [?\C-c ?m] 'column-marker-3)
+(use-package column-marker
+   :ensure t
+   :config
+   (add-hook 'c-mode-common-hook (lambda () (interactive) (column-marker-3 80))))
+  
 
 ;; Activate spell checking within comments
 (add-hook 'c-mode-common-hook 'flyspell-prog-mode)

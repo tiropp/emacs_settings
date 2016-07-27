@@ -16,11 +16,9 @@
 ;; Install a hook running post-init.el *after* initialization took place
 (add-hook 'after-init-hook (lambda () (load "~/.emacs.d/post-init.el")))
 
-;; Do here basic initialization, (require) non-ELPA packages, etc.
-(load-file "~/.emacs.d/init_default.el")
-
 ;; disable automatic loading of packages after init.el is done
 (setq package-enable-at-startup nil)
+
 ;; and force it to happen now
 (package-initialize)
 
@@ -46,3 +44,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Do here basic initialization, (require) non-ELPA packages, etc.
+(load-file "~/.emacs.d/init_default.el")

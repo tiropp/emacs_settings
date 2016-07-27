@@ -4,7 +4,7 @@
 ;; (load-file "~/.emacs.d/settings/cedet_helm.el")
 (load-file "~/.emacs.d/settings/helm.el")
 ;; Use ggtags via helm instead of directly
-;; (load-file "~/.emacs.d/settings/ggtags.
+;; (load-file "~/.emacs.d/settings/ggtags.el")
 (load-file "~/.emacs.d/settings/helm-gtags.el")
 
 
@@ -46,10 +46,11 @@
 ;; `diff-hl-previous-hunk'   C-x v [
 ;; `diff-hl-next-hunk'       C-x v ]
 ;;
-(add-to-list 'load-path "~/.emacs.d/elpa/diff-hl-20150606.643")
-(require 'diff-hl)
-(global-diff-hl-mode)
-(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+(use-package diff-hl
+   :ensure t
+   :config
+   (global-diff-hl-mode)
+   (add-hook 'dired-mode-hook 'diff-hl-dired-mode))
 
 
 ;;;;;;;;;;;
@@ -58,30 +59,37 @@
 ;; Magit is an interface to the version control system Git,
 ;; implemented as an Emacs package.  Magit aspires to be a complete
 ;; Git porcelain.
-(add-to-list 'load-path "~/.emacs.d/elpa/magit-20150803.337")
-(add-to-list 'load-path "~/.emacs.d/elpa/dash-20150717.1321")
-(add-to-list 'load-path "~/.emacs.d/elpa/with-editor-20150710.252")
-(add-to-list 'load-path "~/.emacs.d/elpa/git-commit-20150727.1401")
-(add-to-list 'load-path "~/.emacs.d/elpa/magit-popup-20150730.1344")
-(require 'magit)
-(set-default 'magit-stage-all-confirm nil)
-(add-hook 'magit-mode-hook 'magit-load-config-extensions)
+(use-package magit
+   :ensure t
 
-;; full screen magit-status
-(defadvice magit-status (around magit-fullscreen activate)
-  (window-configuration-to-register :magit-fullscreen)
-  ad-do-it
-  (delete-other-windows))
+   :commands(magit-status)
+   
+   :init
+   (global-unset-key (kbd "C-x t"))
 
-(global-unset-key (kbd "C-x t"))
-(global-set-key (kbd "C-x t h") 'magit-log)
-(global-set-key (kbd "C-x t f") 'magit-file-log)
-(global-set-key (kbd "C-x t b") 'magit-blame-mode)
-(global-set-key (kbd "C-x t m") 'magit-branch-manager)
-(global-set-key (kbd "C-x t c") 'magit-branch)
-(global-set-key (kbd "C-x t s") 'magit-status)
-(global-set-key (kbd "C-x t r") 'magit-reflog)
-(global-set-key (kbd "C-x t t") 'magit-tag)
+   :config
+   (set-default 'magit-stage-all-confirm nil)
+   (add-hook 'magit-mode-hook 'magit-load-config-extensions)
+   
+   ;; full screen magit-status
+   (defadvice magit-status (around magit-fullscreen activate)
+     (window-configuration-to-register :magit-fullscreen)
+     ad-do-it
+     (delete-other-windows))
+
+   :bind(("C-x t h" . magit-log)
+	 ("C-x t f" . magit-file-log)
+	 ("C-x t b" . magit-blame-mode)
+	 ("C-x t m" . magit-branch-manager)
+	 ("C-x t c" . magit-branch)
+	 ("C-x t s" . magit-status)
+	 ("C-x t r" . magit-reflog)
+	 ("C-x t t" . magit-tag))
+   )
+(use-package dash :ensure t)
+(use-package with-editor :ensure t)
+(use-package git-commit :ensure t)
+(use-package magit-popup :ensure t)
 
 
 ;;;;;;;;;;;;;;
@@ -109,8 +117,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; This minor mode provides syntax highlighting of numeric literals
 ;; in source code, like what many editors provide by default.
-(add-to-list 'load-path "~/.emacs.d/elpa/highlight-numbers-20150531.607")
-(add-hook 'prog-mode-hook 'highlight-numbers-mode)
+(use-package highlight-numbers
+   :ensure t
+   :config
+   (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+   )
 
 
 ;;;;;;;;;;;;;;;;;;
@@ -125,114 +136,134 @@
 ;; popup located exactly where the function call is. This is the behavior that
 ;; function-args implements for Emacs.
 ;;
-(add-to-list 'load-path "~/.emacs.d/elpa/function-args-20150731.646")
-(require 'function-args)
-(fa-config-default)
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(set-default 'semantic-case-fold t)
+;; Somehow the function-arg loads the semantic-db stuff, which is annoying, so
+;; lets disable it for the moment.
+;;
+;(add-to-list 'load-path "~/.emacs.d/elpa/function-args-20150731.646")
+;(require 'function-args)
+;(fa-config-default)
+;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+;(set-default 'semantic-case-fold t)
 
 
 ;;;;;;;;;;;;;;;
 ;; Yasnippet ;;
 ;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20150803.1124")
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+   :ensure t
+   :config
+   (yas-global-mode 1))   
+
 
 ;;;;;;;;;;;;;
 ;; Company ;;
 ;;;;;;;;;;;;;
 ;; Company is a modular completion mechanism.  Modules for retrieving completion
 ;; candidates are called back-ends, modules for displaying them are front-ends.
-(add-to-list 'load-path "~/.emacs.d/elpa/company-20150727.1415")
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-
-;; Use clang backend for company
-;;
-;; In case company-semantic via CEDET was activated remove it here again,
-;; s.t. clang backend can be used.
-;; (setq company-backends (delete 'company-semantic company-backends))
-;;
-;; Use tab for completation for C(++)
-(add-hook 'c-mode-common-hook
-	  (lambda()
-	    ;; backtab = shift-tab
-	    (define-key c-mode-map  [(backtab)] 'company-complete)
-	    (define-key c++-mode-map  [(backtab)] 'company-complete)
+(use-package company
+   :ensure t
+	     
+   :config
+   (add-hook 'after-init-hook 'global-company-mode)
+   
+   ;; Use clang backend for company
+   ;;
+   ;; In case company-semantic via CEDET was activated remove it here again,
+   ;; s.t. clang backend can be used.
+   (setq company-backends (delete 'company-semantic company-backends))
+   
+   ;; Use tab for completation for C(++)
+   (add-hook 'c-mode-common-hook
+	     (lambda()
+	       ;; backtab = shift-tab
+               ; (define-key c-mode-map  [(backtab)] 'company-complete)
+               ; (define-key c++-mode-map  [(backtab)] 'company-complete)
+	       (define-key c-mode-map   (kbd "C-;") 'company-complete)
+	       (define-key c++-mode-map (kbd "C-;") 'company-complete)
 	    ))
+   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Company-C-Headers ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/elpa/company-c-headers-20150801.901")
-(add-to-list 'company-backends 'company-c-headers)
+(use-package company-c-headers
+   :ensure t
+
+   :config
+   (add-to-list 'company-backends 'company-c-headers)
+
+   ;; Add additional c++ pathes
+   (add-hook 'c-mode-common-hook
+	     (lambda()
+	       (if (eq system-type 'gnu/linux)
+		   (progn 
+		     (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.9/")      
+		     ))))
+   )
+   
+
+;;;;;;;;;;;
+;; Irony ;;
+;;;;;;;;;;;
 ;;
-;; Add additional c++ pathes
-(add-hook 'c-mode-common-hook
-	  (lambda()
-	    (if (eq system-type 'gnu/linux)
-		(progn 
-		  (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.9/")      
-		  ))))
-
-
-
-;; One could also use irony for code completion, but I never really got it to
-;; work properly.
+;; After first set up run
+;;   M-x irony-install-server
+;; this will will build the irony-server application
 ;;
-;; ;;;;;;;;;;;
-;; ;; Irony ;;
-;; ;;;;;;;;;;;
-;; ;;
-;; ;; After first set up run
-;; ;;   M-x irony-install-server
-;; ;; this will will build the irony-server application
-;; ;;
-;; ;; Setup a project with cmake
-;; ;;   o Add the argument
-;; ;;       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-;; ;;     to cmake. It will create the command_commands.json file in the build
-;; ;;     directory.
-;; ;;
-;; (add-to-list 'load-path "~/.emacs.d/elpa/irony-20150802.1203")
-;; (add-hook 'c++-mode-hook 'irony-mode)
-;; (add-hook 'c-mode-hook 'irony-mode)
-;; (add-hook 'objc-mode-hook 'irony-mode)
+;; Setup a project with cmake
+;;   o Add the argument
+;;       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+;;     to cmake. It will create the command_commands.json file in the build
+;;     directory.
+;;
+(use-package irony
+   :ensure t
+	     
+   :config
+   (add-hook 'c++-mode-hook 'irony-mode)
+   (add-hook 'c-mode-hook 'irony-mode)
+   (add-hook 'objc-mode-hook 'irony-mode)
 
-;; ;; replace the `completion-at-point' and `complete-symbol' bindings in
-;; ;; irony-mode's buffers by irony-mode's function
-;; (defun my-irony-mode-hook ()
-;;   (define-key irony-mode-map [remap completion-at-point]
-;;     'irony-completion-at-point-async)
-;;   (define-key irony-mode-map [remap complete-symbol]
-;;     'irony-completion-at-point-async))
-;; (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+   ;; replace the `completion-at-point' and `complete-symbol' bindings in
+   ;; irony-mode's buffers by irony-mode's function
+   (defun my-irony-mode-hook ()
+     (define-key irony-mode-map [remap completion-at-point]
+       'irony-completion-at-point-async)
+     (define-key irony-mode-map [remap complete-symbol]
+       'irony-completion-at-point-async))
+   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
-;; ;; Only needed on Windows
-;; (when (eq system-type 'windows-nt)
-;;   (setq w32-pipe-read-delay 0))
+   ;; Only needed on Windows
+   (when (eq system-type 'windows-nt)
+     (setq w32-pipe-read-delay 0))
+   
+   )
 
-;; ;;;;;;;;;;;;;;;;;;;
-;; ;; Company-Irony ;;
-;; ;;;;;;;;;;;;;;;;;;;
-;; ;; Irony backend for company
-;; ;;
-;; (add-to-list 'load-path "~/.emacs.d/elpa/company-irony-20140629.1118")
+
+;;;;;;;;;;;;;;;;;;;
+;; Company-Irony ;;
+;;;;;;;;;;;;;;;;;;;
+;; Irony backend for company
+(use-package company-irony
+   :ensure t
+   :config
+   (eval-after-load 'company
+     '(add-to-list 'company-backends 'company-irony))
+   (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+   )    
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Company-Irony-C-Headers ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (add-to-list 'load-path "~/.emacs.d/elpa/company-irony-c-headers-20150728.2335")
+;; (require 'company-irony-c-headers)
+;; ;; Load with `irony-mode` as a grouped backend
 ;; (eval-after-load 'company
-;;   '(add-to-list 'company-backends 'company-irony))
-;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; Company-Irony-C-Headers ;;
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; (add-to-list 'load-path "~/.emacs.d/elpa/company-irony-c-headers-20150728.2335")
-;; ;; (require 'company-irony-c-headers)
-;; ;; ;; Load with `irony-mode` as a grouped backend
-;; ;; (eval-after-load 'company
-;; ;;   '(add-to-list
-;; ;;     'company-backends '(company-irony-c-headers company-irony)))
+;;   '(add-to-list
+;;     'company-backends '(company-irony-c-headers company-irony)))
 
 
 
@@ -240,9 +271,12 @@
 ;; clean-aindent-mode ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Clean up unnecessary white spaces
-(add-to-list 'load-path "~/.emacs.d/elpa/clean-aindent-mode-20150618.948")
-(require 'clean-aindent-mode)
-(add-hook 'prog-mode-hook 'clean-aindent-mode)
+(use-package clean-aindent-mode
+   :ensure t
+   :config
+   (add-hook 'prog-mode-hook 'clean-aindent-mode)
+   )
+
 
 ;;;;;;;;;;;;;;;;;
 ;; dtrt-indent ;;
@@ -251,11 +285,19 @@
 ;; `indent-tabs-mode' originally used for creating source code files and
 ;; transparently adjusts the corresponding settings in Emacs, making it
 ;; more convenient to edit foreign files.
-(add-to-list 'load-path "~/.emacs.d/elpa/dtrt-indent-20150413.243")
+;;
+;; It skrews up the indentation size sometimes, hence deacitave it.
+;(use-package dtrt-indent
+;   :ensure t
+;   :config
+;   (dtrt-indent-mode 1)
+;   )
+;   (add-to-list 'load-path "~/.emacs.d/elpa/dtrt-indent-20150413.243")
 ;;
 ;; It skrews up the indentation size sometimes, hence deacitave it.
 ; (require 'dtrt-indent)
 ; (dtrt-indent-mode 1)
+
 
 ;;;;;;;;;;;;;;;
 ;; ws-butler ;;
@@ -263,6 +305,7 @@
 ;; ws-butler helps managing whitespace on every line of code written or edited,
 ;; in an unobtrusive, help you write clean code without noisy whitespace
 ;; effortlessly
-(add-to-list 'load-path "~/.emacs.d/elpa/ws-butler-20150126.759")
-(require 'ws-butler)
-(add-hook 'c-mode-common-hook 'ws-butler-mode)
+(use-package ws-butler
+   :ensure t
+   :config
+   (add-hook 'c-mode-common-hook 'ws-butler-mode))

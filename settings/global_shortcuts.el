@@ -62,13 +62,13 @@ Uses `current-date-time-format' for the formatting the date/time."
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HIGHLITHING SYMBOL ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
-;; taken from: http://nschum.de/src/emacs/highlight-symbol/
-;;(add-to-list 'load-path "~/.emacs.d")
-(load-file "~/.emacs.d/settings/highlight-symbol.el")
-(require 'highlight-symbol)
-
-(global-set-key [f7]           'highlight-symbol-at-point)
-(global-set-key [(shift f7)]   'highlight-symbol-next)
-(global-set-key [(control f7)] 'highlight-symbol-prev)
-
-(put 'narrow-to-region 'disabled nil)
+;; highlight-symbol taken from: http://nschum.de/src/emacs/highlight-symbol/
+(use-package highlight-symbol
+   :init
+   (load-file "~/.emacs.d/settings/highlight-symbol.el")
+   :bind (([f7]           . highlight-symbol-at-point)
+	  ([(shift f7)]   . highlight-symbol-next)
+	  ([(control f7)] . highlight-symbol-prev))
+   :config
+   (put 'narrow-to-region 'disabled nil)
+   )

@@ -44,22 +44,29 @@
 ;; Color-Theme ;;
 ;;;;;;;;;;;;;;;;;
 ;;;; color-theme-solarized
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/emacs-color-theme-solarized")
-;; (load-theme 'solarized t)
-;;
+;(use-package emacs-color-theme-solarized
+;  :config
+;  (load-theme 'solarized t))
+	     
 ;;;; color-theme-sanityinc-tomorrow
-(add-to-list 'load-path "~/.emacs.d/elpa/color-theme-sanityinc-tomorrow-20150803.1419")
-(require 'color-theme-sanityinc-tomorrow)
-(load-theme 'sanityinc-tomorrow-night t)
-;;
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  (load-theme 'sanityinc-tomorrow-night t))
+
 ;;;; grandshell-theme
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/grandshell-theme-20150404.501")
-;; (load-theme 'grandshell t)
-;;
+;; (use-package grandshell-theme
+;;    :ensure t
+;;    :config
+;;    (load-theme 'grandshell t))
+
 ;;;; cobalt-theme
 ;;;; from: http://emacsthemes.caisah.info/cobalt-theme/
-;; (add-to-list 'load-path "~/.emacs.d/elpa/color-theme-20080305.34")
-;; (require 'color-theme)
-;; (color-theme-initialize)
-;; (load-file "~/.emacs.d/plugins/cobalt-theme/color-theme-cobalt.el")
-;; (color-theme-cobalt)
+;; (use-package color-theme
+;;    :ensure t
+;;    :config
+;;    (color-theme-initialize))
+;; (use-package color-theme-cobalt
+;;    :load-path "plugins/"
+;;    :config
+;;    (color-theme-cobalt))
