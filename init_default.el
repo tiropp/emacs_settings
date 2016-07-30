@@ -34,6 +34,7 @@
 ;;;;;;;;;
 (load-file "~/.emacs.d/settings/cpp.el")
 (load-file "~/.emacs.d/settings/cpp_macros.el");
+(load-file "~/.emacs.d/settings/gud.el");
 
 ;;;;;;;;;;;;;;;;
 ;; TEX, LATEX ;;
