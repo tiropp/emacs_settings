@@ -309,3 +309,17 @@
    :ensure t
    :config
    (add-hook 'c-mode-common-hook 'ws-butler-mode))
+
+
+
+;;;;;;;;;;;
+;; rtags ;;
+;;;;;;;;;;;
+(use-package rtags
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+  (rtags-enable-standard-keybindings)
+  :bind(("M-." . rtags-find-symbol-at-this-point))
+  )
