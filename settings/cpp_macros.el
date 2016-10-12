@@ -13,23 +13,45 @@
     )
   )
 
-(defun cpp-insert-namespace(name)
+(defun cpp-do-insert-one-namespace(name)
   "Insert namespace snippet"
+  (insert "namespace " name " {\n")
+  ;; No indentation done here, because namespace "should" not be indented anyway
+  ;; at least not in the current style I like.
+  ;;   (indent-according-to-mode)
+  (let ((pos (point)))
+    (insert "\n} // End namespace " name)
+    (goto-char pos)))
+(defun cpp-do-insert-namespaces(names)
+  "Snippet to insert several namespace"
+  (let ((name-tokens (split-string names "\\.")))
+    (let ((name (car name-tokens)))
+      (while name-tokens
+	(let ((name (car name-tokens)))
+	  (cpp-do-insert-one-namespace name))
+	(setq name-tokens (cdr name-tokens))))))
+(defun cpp-do-insert-unnamed-namespace()
+  "Snippet to insert an unnamed namespace"
+  (insert "namespace {\n")
+  (let ((pos (point)))
+    (insert "\n} // End unnamed namespace ")
+    (goto-char pos)
+    ))
+(defun cpp-insert-namespace(names)
+  "Interactively insert namespace snippet
+
+It is possible to specify several namespace wihtin one command by separating
+namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
+  namespace abc {
+  namespace def {
+  } // End namespace def
+  } // End namespace abc
+"
   (interactive "sNamespace: ")
-  (if (> (length name) 0)
-      (progn
-	(insert "namespace " name " {\n")
-	(indent-according-to-mode)
-	(let ((pos (point)))
-	   (insert "\n} // End namespace " name)
-	   (goto-char pos)
-	   ))
-    (progn
-      (insert "namespace {\n")
-      (let ((pos (point)))
-	(insert "\n} // End unnamed namespace ")
-	(goto-char pos)
-	))))
+  (if (> (length names) 0)
+      (cpp-do-insert-namespaces names)
+    (cpp-do-insert-unnamed-namespace)
+    ))
 
 (defun cpp-insert-header-guard(name)
   "Insert header guard"
