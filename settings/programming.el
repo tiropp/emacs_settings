@@ -196,7 +196,7 @@
 	     (lambda()
 	       (if (eq system-type 'gnu/linux)
 		   (progn 
-		     (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.9/")      
+		     (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")      
 		     ))))
    )
    
