@@ -177,7 +177,7 @@
 	     (lambda()
 	       ;; backtab = shift-tab
 	       ;; (define-key c-mode-base-map [(backtab)] 'company-complete)
-	       (define-key c-mode-base-map (kbd "C-SPC") 'company-complete)
+	       (define-key c-mode-base-map (kbd "<C-tab>") 'company-complete)
 	    ))
    )
 
