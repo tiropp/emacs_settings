@@ -176,10 +176,8 @@
    (add-hook 'c-mode-common-hook
 	     (lambda()
 	       ;; backtab = shift-tab
-               ; (define-key c-mode-map  [(backtab)] 'company-complete)
-               ; (define-key c++-mode-map  [(backtab)] 'company-complete)
-	       (define-key c-mode-map   (kbd "C-;") 'company-complete)
-	       (define-key c++-mode-map (kbd "C-;") 'company-complete)
+	       ;; (define-key c-mode-base-map [(backtab)] 'company-complete)
+	       (define-key c-mode-base-map (kbd "C-SPC") 'company-complete)
 	    ))
    )
 
