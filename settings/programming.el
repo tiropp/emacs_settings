@@ -318,6 +318,17 @@
   :config
   (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
   (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+
+  ;; Keybindings
   (rtags-enable-standard-keybindings)
-  :bind(("M-." . rtags-find-symbol-at-this-point))
+
+  (setq rtags-autostart-diagnostics t)
+  (rtags-diagnostics)
+  
+  (setq rtags-use-helm t)
+
+  ;; Use rtags as company backend
+  (setq rtags-completions-enabled t)    
+  (require 'company)
+  (push 'company-rtags company-backends)
   )
