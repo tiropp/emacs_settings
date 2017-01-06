@@ -345,3 +345,23 @@
   (require 'company)
   (push 'company-rtags company-backends)
   )
+
+
+;;;;;;;;
+;; HS ;;
+;;;;;;;;
+;; hs-minor-mode can be used to hide blocks of code
+;;
+;; E.g. a block is everything within a '{..}'
+;;
+;; Default key bindings:
+;; Key 	        Command             Description
+;; C-c @ C-c 	hs-toggle-hiding    Toggle hiding/showing of a block
+;; C-c @ C-h 	hs-hide-block       Select current block at point and hide it
+;; C-c @ C-l 	hs-hide-level       Hide all block with indentation levels below this block
+;; C-c @ C-s 	hs-show-block       Select current block at point and show it.
+;; C-c @ C-M-h 	hs-hide-all         Hide all top level blocks, displaying only first and last lines.
+;; C-c @ C-M-s 	hs-show-all         Show everything
+;;
+(add-hook 'c-mode-common-hook 'hs-minor-mode)
+
