@@ -199,7 +199,20 @@
 		     (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")      
 		     ))))
    )
-   
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Company-Quitckhelp ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Shows doxygen help as overlay for company-compeltion listing
+;;
+;; I.e. the same information is displayed as can be accessed by pressing <f1> if
+;; company-completion listing is shown.
+(use-package company-quickhelp
+  :ensure t
+  :config
+  (company-quickhelp-mode 1)
+  )
+
 
 ;;;;;;;;;;;
 ;; Irony ;;
