@@ -1,9 +1,14 @@
 ;;
 ;; Define macros for C++
 ;;
+
+;;
+;; cpp-insert-section
+;;
 (defun cpp-insert-section-header(name)
   "Insert a code section header into c++ code"
-  (interactive "sSection: ")
+  (interactive
+   (list (read-from-minibuffer "Section: " nil nil nil 'cpp-insert-section-history)))
   (let ((n (length name)))
     (let (( s1 (concat  "/****" (make-string n ?*) "****/\n") ))
 	 (indent-according-to-mode)(insert s1)
@@ -13,6 +18,10 @@
     )
   )
 
+
+;;
+;; cpp-insert-namespace
+;;
 (defun cpp-do-insert-one-namespace(name)
   "Insert namespace snippet"
   (insert "namespace " name " {\n")
@@ -47,15 +56,20 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
   } // End namespace def
   } // End namespace abc
 "
-  (interactive "sNamespace: ")
+  (interactive
+   (list (read-from-minibuffer "Namespace: " nil nil nil 'cpp-insert-namespace-history)))
   (if (> (length names) 0)
       (cpp-do-insert-namespaces names)
     (cpp-do-insert-unnamed-namespace)
     ))
 
+;;
+;; cpp-insert-header-guard
+;;
 (defun cpp-insert-header-guard(name)
   "Insert header guard"
-  (interactive "sHeader guard: ")
+  (interactive
+   (list (read-from-minibuffer "Header guard: " nil nil nil 'cpp-insert-header-guard-history)))
   (beginning-of-line)(insert "#ifndef " name "\n#define " name "\n\n")
   (let ((pos (point)))
     (insert "\n\n#endif  // " name "\n")
@@ -63,6 +77,10 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
     )
   )
 
+
+;;
+;; cpp-macro-keys
+;;
 (defun cpp-macro-keys()
   "Setup C++ macro keys and menus"
   ;; Key map
