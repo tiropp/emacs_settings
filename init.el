@@ -22,6 +22,12 @@
 ;; and force it to happen now
 (package-initialize)
 
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+
 ;; NOW you can (require) your ELPA packages and configure them as normal
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
