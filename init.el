@@ -1,7 +1,14 @@
 ;;
 ;; The emacs root configuration file 
 ;;
-;;
+
+
+;; If you are behind a proxy, uncomment the following lines and set the corrent
+;; proxy host
+;; (setq url-proxy-services
+;;   '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;;     ("http" . "proxy.com:8080")
+;;     ("https" . "proxy.com:8080")))
 
 ;; this is intended for manually installed libraries
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
