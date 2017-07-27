@@ -61,4 +61,8 @@
 ;;;;;;;;;;;
 (load-file "~/.emacs.d/settings/cmake.el")
 
+;;;;;;;;;;;;;;
+;; MARKDOWN ;;
+;;;;;;;;;;;;;;
+(load-file "~/.emacs.d/settings/markdown.el")
 
