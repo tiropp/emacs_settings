@@ -77,6 +77,15 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
     )
   )
 
+;;
+;; insert-file-name-without-ending
+;;
+(defun cpp-insert-file-name-without-ending()
+  "Insert file name of current buffer without file ending"
+  (interactive
+   (insert (file-name-base (buffer-file-name))))
+  )
+
 
 ;;
 ;; cpp-macro-keys
@@ -87,6 +96,7 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
   (define-key c-mode-base-map [(control n) (h)] 'cpp-insert-section-header)
   (define-key c-mode-base-map [(control n) (n)] 'cpp-insert-namespace)
   (define-key c-mode-base-map [(control n) (g)] 'cpp-insert-header-guard)
+  (define-key c-mode-base-map [(control n) (f)] 'cpp-insert-file-name-without-ending)
 
   ;; Creating a new menu pane 'C++2' in the menu bar
   (let ((menuMap (make-sparse-keymap "C++2")))  
@@ -96,8 +106,9 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
     (define-key menuMap [in]
       '("Insert Namespace" . cpp-insert-namespace))
     (define-key menuMap [ig]
-      '("Insert Header Guard" . cpp-insert-header-guard)))
-  )
+      '("Insert Header Guard" . cpp-insert-header-guard))
+    (define-key menuMap [if]
+      '("Insert Filename". cpp-insert-file-name-without-ending))))
 
 (add-hook 'c-mode-common-hook
 	  ;; Set the tab size to 4, same as indent size
@@ -121,3 +132,4 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
 ;;     (insert  header1))
 ;; ;;;; here are the key bindings
 ;; (global-set-key "\C-h1" 'insert-header1)
+
