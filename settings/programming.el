@@ -365,3 +365,17 @@
 ;;
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 
+
+;;;;;;;;;;;;;;;
+;; helm-dash ;;
+;;;;;;;;;;;;;;;
+(use-package helm-dash
+  :ensure t
+  :bind(("C-c d ." . helm-dash-at-point)
+	("C-c d l" . helm-dash))
+  :config
+  (defun cpp-doc ()
+    (setq-local helm-dash-docsets '("C++")))
+  (add-hook 'c-mode-hook 'cpp-doc)
+  (add-hook 'c++-mode-hook 'cpp-doc)
+  )
