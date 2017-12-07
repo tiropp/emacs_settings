@@ -10,9 +10,10 @@
 ;;
 ;; Nicer font
 (if (eq system-type 'gnu/linux)
-    (progn 
-      (setq default-frame-alist '((font . "Inconsolata-11")))
-      ))
+    (progn
+      (if (find-font (font-spec :name "Inconsolata-11"))
+       (setq default-frame-alist '((font . "Inconsolata-11")))
+       )))
 ;; NB: If font is not installed, emacs may crash. This was observed under Windwos.
 
 
