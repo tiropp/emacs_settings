@@ -9,5 +9,5 @@
 ;; This sould work even if use-package.el is not around at runtime
 (eval-when-compile
   (require 'use-package))
-(require 'diminish)                ;; if you use :diminish
-(require 'bind-key)                ;; if you use any :bind variant
+; (use-package diminish)                ;; if you use :diminish
+(use-package bind-key)                ;; if you use any :bind variant
