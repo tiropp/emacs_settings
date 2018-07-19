@@ -91,6 +91,15 @@
 (use-package git-commit :ensure t)
 (use-package magit-popup :ensure t)
 
+;;;;;;;;;;
+;; dsvn ;;
+;;;;;;;;;;
+(use-package dsvn
+  :ensure t
+
+  :bind(("C-x v s" . svn-status)
+	)
+  )
 
 ;;;;;;;;;;;;;;
 ;; Flycheck ;;
