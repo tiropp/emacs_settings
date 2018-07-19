@@ -16,9 +16,9 @@
 ;; load the package system and add some repositories
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "https://melpa.milkbox.net/packages/") t)
 
 ;; Install a hook running post-init.el *after* initialization took place
 (add-hook 'after-init-hook (lambda () (load "~/.emacs.d/post-init.el")))
