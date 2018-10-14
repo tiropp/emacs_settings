@@ -66,3 +66,7 @@
 ;;;;;;;;;;;;;;
 (load-file "~/.emacs.d/settings/markdown.el")
 
+;;;;;;;;;
+;; ORG ;;
+;;;;;;;;;
+(load-file "~/.emacs.d/settings/org.el")
