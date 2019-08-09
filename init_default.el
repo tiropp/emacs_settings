@@ -52,6 +52,11 @@
 (load-file "~/.emacs.d/settings/csharp.el")
 
 ;;;;;;;;;
+;; ELM ;;
+;;;;;;;;;
+(load-file "~/.emacs.d/settings/elm.el")
+
+;;;;;;;;;
 ;; SSH ;;
 ;;;;;;;;;
 (load-file "~/.emacs.d/settings/ssh.el")
