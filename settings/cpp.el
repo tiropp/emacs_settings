@@ -32,8 +32,13 @@
 ;;
 ;; Use C-c m to set a new marker position
 ;; (global-set-key [?\C-c ?m] 'column-marker-3)
+;;
+;; NB: column-maker seems not to be found via elpa/marmalade anymore. Got the
+;; file from https://www.emacswiki.org/emacs/ColumnMarker instead
+;;
 (use-package column-marker
-   :ensure t
+   :init
+   (load-file "~/.emacs.d/settings/column-marker.el")
    :config
    (add-hook 'c-mode-common-hook (lambda () (interactive) (column-marker-3 80))))
   
