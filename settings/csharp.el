@@ -1,16 +1,10 @@
 ;;
 ;; C# configuration
 ;;
-;; ;; Add file
-;; (add-to-list 'load-path "~/.emacs.d")
-;; (require 'csharp-mode
-;; )
-
-;; ;; Set mode
-;; (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-;; (setq auto-mode-alist
-;;       (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
-
+(use-package csharp-mode
+  :ensure t
+  )
+	    
 ;; ;; Custom code to use a default compiler string for all C# files
 ;; ;; This is for flymake which per default expects the compiler to be csc.exe
 ;; (defvar my-csharp-default-compiler nil)
