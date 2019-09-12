@@ -75,3 +75,8 @@
 ;; ORG ;;
 ;;;;;;;;;
 (load-file "~/.emacs.d/settings/org.el")
+
+;;;;;;;;;;
+;; XAML ;;
+;;;;;;;;;;
+(load-file "~/.emacs.d/settings/xaml.el")
