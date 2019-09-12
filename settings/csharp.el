@@ -3,6 +3,8 @@
 ;;
 (use-package csharp-mode
   :ensure t
+  :config
+  (add-hook 'csharp-mode-hook (lambda() (setq indent-tabs-mode nil)))
   )
 	    
 ;; ;; Custom code to use a default compiler string for all C# files
