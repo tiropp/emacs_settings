@@ -2,6 +2,7 @@
 ;; C# configuration
 ;;
 (use-package csharp-mode
+  :defer t
   :ensure t
   :config
   (add-hook 'csharp-mode-hook (lambda() (setq indent-tabs-mode nil)))

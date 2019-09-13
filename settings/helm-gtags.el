@@ -22,6 +22,7 @@
 ;; C-c g a helm-gtags-tags-in-this-function   Gives lits of functions called by the current function
 ;;
 (use-package helm-gtags
+   :defer t
    :ensure t
    :init
    (setq helm-gtags-prefix-key "\C-cg")

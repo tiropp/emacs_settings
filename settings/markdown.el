@@ -2,6 +2,7 @@
 ;; markdown settings
 ;;
 (use-package markdown-mode
+  :defer t
   :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -11,5 +12,6 @@
   )
 
 (use-package flymd
+  :defer t
   :ensure t
   )

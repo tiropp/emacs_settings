@@ -64,6 +64,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; highlight-symbol taken from: http://nschum.de/src/emacs/highlight-symbol/
 (use-package highlight-symbol
+   :defer t
    :init
    (load-file "~/.emacs.d/settings/highlight-symbol.el")
    :bind (([f7]           . highlight-symbol-at-point)

@@ -27,6 +27,7 @@
 ;;
 ;; <prefix> c      helm-color     --> Color picker, can also change theme
 (use-package helm
+   :defer t
    :ensure t
 	     
    :bind(("M-x"         . helm-M-x)
@@ -105,6 +106,7 @@
 ;; PACKAGE: helm-swoop                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package helm-swoop
+   :defer t
    :ensure t
    :bind(("C-c h o" . helm-swoop)
 	 ("C-c s"   . helm-multi-swoop-all)

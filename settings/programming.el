@@ -47,6 +47,7 @@
 ;; `diff-hl-next-hunk'       C-x v ]
 ;;
 (use-package diff-hl
+   :defer t
    :ensure t
    :config
    (global-diff-hl-mode)
@@ -60,6 +61,7 @@
 ;; implemented as an Emacs package.  Magit aspires to be a complete
 ;; Git porcelain.
 (use-package magit
+   :defer t
    :ensure t
 
    :commands(magit-status)
@@ -86,15 +88,24 @@
 	 ("C-x t r" . magit-reflog)
 	 ("C-x t t" . magit-tag))
    )
-(use-package dash :ensure t)
-(use-package with-editor :ensure t)
-(use-package git-commit :ensure t)
-(use-package magit-popup :ensure t)
+(use-package dash
+  :defer t
+  :ensure t)
+(use-package with-editor
+  :defer t
+  :ensure t)
+(use-package git-commit
+  :defer t
+  :ensure t)
+(use-package magit-popup
+  :defer t
+  :ensure t)
 
 ;;;;;;;;;;
 ;; dsvn ;;
 ;;;;;;;;;;
 (use-package dsvn
+  :defer t 
   :ensure t
 
   :bind(("C-x v s" . svn-status)
@@ -127,6 +138,7 @@
 ;; This minor mode provides syntax highlighting of numeric literals
 ;; in source code, like what many editors provide by default.
 (use-package highlight-numbers
+   :defer t
    :ensure t
    :config
    (add-hook 'prog-mode-hook 'highlight-numbers-mode)
@@ -159,6 +171,7 @@
 ;; Yasnippet ;;
 ;;;;;;;;;;;;;;;
 (use-package yasnippet
+   :defer t
    :ensure t
    :config
    (yas-global-mode 1))   
@@ -170,6 +183,7 @@
 ;; Company is a modular completion mechanism.  Modules for retrieving completion
 ;; candidates are called back-ends, modules for displaying them are front-ends.
 (use-package company
+   :defer t
    :ensure t
 	     
    :config
@@ -195,6 +209,7 @@
 ;; Company-C-Headers ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 (use-package company-c-headers
+   :defer t
    :ensure t
 
    :config
@@ -217,6 +232,7 @@
 ;; I.e. the same information is displayed as can be accessed by pressing <f1> if
 ;; company-completion listing is shown.
 (use-package company-quickhelp
+  :defer t
   :ensure t
   :config
   (company-quickhelp-mode 1)
@@ -238,6 +254,7 @@
 ;;     directory.
 ;;
 (use-package irony
+   :defer t  
    :ensure t
 	     
    :config
@@ -267,6 +284,7 @@
 ;;;;;;;;;;;;;;;;;;;
 ;; Irony backend for company
 (use-package company-irony
+   :defer t
    :ensure t
    :config
    (eval-after-load 'company
@@ -292,6 +310,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Clean up unnecessary white spaces
 (use-package clean-aindent-mode
+   :defer t
    :ensure t
    :config
    (add-hook 'prog-mode-hook 'clean-aindent-mode)
@@ -326,6 +345,7 @@
 ;; in an unobtrusive, help you write clean code without noisy whitespace
 ;; effortlessly
 (use-package ws-butler
+   :defer t  
    :ensure t
    :config
    (add-hook 'c-mode-common-hook 'ws-butler-mode))
@@ -336,6 +356,7 @@
 ;; rtags ;;
 ;;;;;;;;;;;
 (use-package rtags
+  :defer t  
   :ensure t
   :config
   (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
@@ -365,7 +386,7 @@
 ;;
 ;; Default key bindings:
 ;; Key 	        Command             Description
-;; C-c @ C-c 	hs-toggle-hiding    Toggle hiding/showing of a block
+;; C-c @ C-e 	hs-toggle-hiding    Toggle hiding/showing of a block
 ;; C-c @ C-h 	hs-hide-block       Select current block at point and hide it
 ;; C-c @ C-l 	hs-hide-level       Hide all block with indentation levels below this block
 ;; C-c @ C-s 	hs-show-block       Select current block at point and show it.
@@ -379,6 +400,7 @@
 ;; MULTIPLE-CURSORS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 (use-package multiple-cursors
+  :defer t
   :ensure t
   :bind(("C->" .     mc/mark-next-like-this)
 	("C-<" .     mc/mark-previous-like-this)
@@ -388,7 +410,9 @@
 ;;;;;;;;;;;;;;;
 ;; helm-dash ;;
 ;;;;;;;;;;;;;;;
+;; Dash docu system with helm support
 (use-package helm-dash
+  :defer t
   :ensure t
   :bind(("C-c d ." . helm-dash-at-point)
 	("C-c d l" . helm-dash))

@@ -2,6 +2,7 @@
 ;; CMAKE settings
 ;;
 (use-package cmake-mode
+   :defer t
    :ensure t
    :mode("CMakeLists\\.txt\\'" "\\.cmake\\'")
    
