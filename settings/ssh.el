@@ -5,6 +5,5 @@
 ;; (require 'tramp)
 ;; (setq tramp-default-method "ssh")
 (use-package tramp
-  :defer t
   :config
   (setq tramp-default-method "ssh"))

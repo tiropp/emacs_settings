@@ -37,7 +37,6 @@
 ;; file from https://www.emacswiki.org/emacs/ColumnMarker instead
 ;;
 (use-package column-marker
-   :defer t
    :init
    (load-file "~/.emacs.d/settings/column-marker.el")
    :config
@@ -46,7 +45,6 @@
 ;; Multi cursor changes
 ;;
 (use-package iedit
-  :defer t
   :ensure t
   :bind (("C-c m c" . iedit-mode))
   :config  

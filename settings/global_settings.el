@@ -79,7 +79,6 @@
 ;; when any new command is executed.
 ;;
 (use-package volatile-highlights
-   :defer t
    :ensure t
    :config
    (require 'volatile-highlights)
@@ -91,7 +90,6 @@
 ;;;;;;;;;;;;;;;
 ;; Use undo-tree-visualize to see the undo tree in a separated buffer.
 (use-package undo-tree
-   :defer t
    :ensure t
    :config
    (require 'undo-tree)
@@ -105,7 +103,6 @@
 ;; pressing the key until it selects what you want.
 ;;
 (use-package expand-region
-   :defer t
    :ensure t
    :bind (("M-m" . er/expand-region)))   
 
@@ -120,7 +117,6 @@
 ;; only turn on if a window system is available
 ;; this prevents error under terminal that does not support X
 (use-package nyan-mode
-   :defer t
    :ensure t
    :config
    (case window-system
@@ -180,7 +176,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Discover key bindings and their meaning for the current Emacs major mode
 (use-package discover-my-major
-   :defer t
    :ensure t
    :init
    (global-unset-key (kbd "C-h h"))  ; original "C-h h" displays "hello world" in different languages
@@ -188,7 +183,6 @@
    (define-key 'help-command (kbd "h m") 'discover-my-major)
    )
 (use-package makey
-   :defer t
    :ensure t
    )
 
