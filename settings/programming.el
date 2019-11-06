@@ -359,6 +359,11 @@
   (setq rtags-completions-enabled t)    
   (require 'company)
   (push 'company-rtags company-backends)
+
+  ;; set different bin names
+  ;; these are default not when installing rtags with apt
+  (setq rtags-rc-binary-name "rtags-rc")
+  (setq rtags-rdm-binary-name "rtags-rdm")
   )
 
 
