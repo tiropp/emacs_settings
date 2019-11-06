@@ -46,6 +46,16 @@
   (aset buffer-display-table ?\^M []))
 
 
+
+;;;;;;;;;;;;;;;;
+;; BOTTOM BAR ;;
+;;;;;;;;;;;;;;;;
+(use-package powerline
+  :ensure t
+  :init (powerline-default-theme)
+  )
+
+
 ;;;;;;;;;;;;;;;;;
 ;; Color-Theme ;;
 ;;;;;;;;;;;;;;;;;
