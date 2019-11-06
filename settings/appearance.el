@@ -11,10 +11,10 @@
 ;; Nicer font
 (if (eq system-type 'gnu/linux)
     (progn
-      (cond ((find-font (font-spec :name "Source Code Pro-14"))
-	     (setq default-frame-alist '((font . "Source Code Pro-14"))))
-	    ((find-font (font-spec :name "Inconsolata-14"))
-	     (setq default-frame-alist '((font . "Inconsolata-14"))))
+      (cond ((find-font (font-spec :name "Source Code Pro-12"))
+	     (setq default-frame-alist '((font . "Source Code Pro-12"))))
+	    ((find-font (font-spec :name "Inconsolata-12"))
+	     (setq default-frame-alist '((font . "Inconsolata-12"))))
 	    )
       )
   )
