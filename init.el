@@ -20,6 +20,11 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.milkbox.net/packages/") t)
 
+;; Some workaround for when trying to download packages from elpa and getting
+;; 'bad request' back
+(if (and (version< emacs-version "26.3") (>= libgnutls-version 30604))
+    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+
 ;; Install a hook running post-init.el *after* initialization took place
 (add-hook 'after-init-hook (lambda () (load "~/.emacs.d/post-init.el")))
 
