@@ -270,9 +270,10 @@
 ;; first some configuration setting variables. When the variables are set to
 ;; true, then the framwork is activated.
 ;;
-(setq use-irony t)
+(setq use-irony nil)
 (setq use-company t)
-(setq use-rtags t)
+(setq use-rtags nil)
+(setq use-ccls t)
 
 
 
@@ -428,5 +429,40 @@
     ;; these are default not when installing rtags with apt
     (setq rtags-rc-binary-name "rtags-rc")
     (setq rtags-rdm-binary-name "rtags-rdm")
+    )
+)
+
+
+(when (eq use-ccls t)
+  (use-package lsp-mode
+    :ensure t
+    :commands lsp
+    )
+  (use-package lsp-ui
+    :ensure t
+    :commands lsp-ui-mode
+    )
+  (use-package company-lsp
+    :ensure t
+    :commands company-lsp
+    )
+  (use-package helm-lsp
+    :ensure t
+    :commands helm-lsp-workspace-symbol
+    )
+  (use-package helm-xref
+    :ensure t
+  )
+  
+  ;; use debugger
+  ;; (use-package dap-mode
+  ;;   :ensure t
+  ;; )
+  ;; (use-package dap-LANGUAGE)
+
+  (use-package ccls
+    :ensure t
+    :hook ((c-mode c++-mode) .
+	   (lambda() (require 'ccls) (lsp)))
     )
 )
