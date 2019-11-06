@@ -65,10 +65,10 @@
 ;  (load-theme 'solarized t))
 	     
 ;;;; color-theme-sanityinc-tomorrow
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :config
-  (load-theme 'sanityinc-tomorrow-night t))
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :ensure t
+;;   :config
+;;   (load-theme 'sanityinc-tomorrow-night t))
 
 ;;;; grandshell-theme
 ;; (use-package grandshell-theme
@@ -86,3 +86,12 @@
 ;;    :load-path "plugins/"
 ;;    :config
 ;;    (color-theme-cobalt))
+
+;;;; spacemacs
+(use-package spacemacs-theme
+  :ensure t
+  :defer t
+  :init (load-theme 'spacemacs-dark t)
+  )
+
+
