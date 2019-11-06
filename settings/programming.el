@@ -105,25 +105,6 @@
 	)
   )
 
-;;;;;;;;;;;;;;
-;; Flycheck ;;
-;;;;;;;;;;;;;;
-;; On-the-fly syntax checking for GNU Emacs 24.
-;;
-;; NB: Flycheck and/or popup causes emacs to crash on Win32
-;;
-; (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-20150802.212")
-; (require 'flycheck)
-; (add-hook 'after-init-hook #'global-flycheck-mode)
-
-
-;; The errors are now displayed by popup, instead of printing into the echo
-;; area.
-; (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-tip-20150726.156")
-; (add-to-list 'load-path "~/.emacs.d/elpa/popup-20150626.711")
-; (require 'flycheck-tip)
-; (flycheck-tip-use-timer 'verbose)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Highlight-Numbers ;;
@@ -170,129 +151,6 @@
   :ensure t)
 
 
-;;;;;;;;;;;;;
-;; Company ;;
-;;;;;;;;;;;;;
-;; Company is a modular completion mechanism.  Modules for retrieving completion
-;; candidates are called back-ends, modules for displaying them are front-ends.
-(use-package company
-   :ensure t
-	     
-   :config
-   (add-hook 'after-init-hook 'global-company-mode)
-   
-   ;; Use clang backend for company
-   ;;
-   ;; In case company-semantic via CEDET was activated remove it here again,
-   ;; s.t. clang backend can be used.
-   (setq company-backends (delete 'company-semantic company-backends))
-   
-   ;; Use tab for completation for C(++)
-   (add-hook 'c-mode-common-hook
-	     (lambda()
-	       ;; backtab = shift-tab
-	       ;; (define-key c-mode-base-map [(backtab)] 'company-complete)
-	       (define-key c-mode-base-map (kbd "<C-tab>") 'company-complete)
-	    ))
-   )
-
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;; Company-C-Headers ;;
-;;;;;;;;;;;;;;;;;;;;;;;
-(use-package company-c-headers
-   :ensure t
-
-   :config
-   (add-to-list 'company-backends 'company-c-headers)
-
-   ;; Add additional c++ pathes
-   (add-hook 'c-mode-common-hook
-	     (lambda()
-	       (if (eq system-type 'gnu/linux)
-		   (progn 
-		     (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")      
-		     ))))
-   )
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-;; Company-Quitckhelp ;;
-;;;;;;;;;;;;;;;;;;;;;;;;
-;; Shows doxygen help as overlay for company-compeltion listing
-;;
-;; I.e. the same information is displayed as can be accessed by pressing <f1> if
-;; company-completion listing is shown.
-(use-package company-quickhelp
-  :ensure t
-  :config
-  (company-quickhelp-mode 1)
-  )
-
-
-;;;;;;;;;;;
-;; Irony ;;
-;;;;;;;;;;;
-;;
-;; After first set up run
-;;   M-x irony-install-server
-;; this will will build the irony-server application
-;;
-;; Setup a project with cmake
-;;   o Add the argument
-;;       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-;;     to cmake. It will create the command_commands.json file in the build
-;;     directory.
-;;
-(use-package irony
-   :ensure t
-	     
-   :config
-   (add-hook 'c++-mode-hook 'irony-mode)
-   (add-hook 'c-mode-hook 'irony-mode)
-   (add-hook 'objc-mode-hook 'irony-mode)
-
-   ;; replace the `completion-at-point' and `complete-symbol' bindings in
-   ;; irony-mode's buffers by irony-mode's function
-   (defun my-irony-mode-hook ()
-     (define-key irony-mode-map [remap completion-at-point]
-       'irony-completion-at-point-async)
-     (define-key irony-mode-map [remap complete-symbol]
-       'irony-completion-at-point-async))
-   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-
-   ;; Only needed on Windows
-   (when (eq system-type 'windows-nt)
-     (setq w32-pipe-read-delay 0))
-   
-   )
-
-
-;;;;;;;;;;;;;;;;;;;
-;; Company-Irony ;;
-;;;;;;;;;;;;;;;;;;;
-;; Irony backend for company
-(use-package company-irony
-   :ensure t
-   :config
-   (eval-after-load 'company
-     '(add-to-list 'company-backends 'company-irony))
-   (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-   )    
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Company-Irony-C-Headers ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (add-to-list 'load-path "~/.emacs.d/elpa/company-irony-c-headers-20150728.2335")
-;; (require 'company-irony-c-headers)
-;; ;; Load with `irony-mode` as a grouped backend
-;; (eval-after-load 'company
-;;   '(add-to-list
-;;     'company-backends '(company-irony-c-headers company-irony)))
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clean-aindent-mode ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -337,36 +195,6 @@
    (add-hook 'c-mode-common-hook 'ws-butler-mode))
 
 
-
-;;;;;;;;;;;
-;; rtags ;;
-;;;;;;;;;;;
-(use-package rtags
-  :ensure t
-  :config
-  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
-
-  ;; Keybindings
-  (rtags-enable-standard-keybindings)
-
-  (setq rtags-autostart-diagnostics t)
-  (rtags-diagnostics)
-  
-  (setq rtags-use-helm t)
-
-  ;; Use rtags as company backend
-  (setq rtags-completions-enabled t)    
-  (require 'company)
-  (push 'company-rtags company-backends)
-
-  ;; set different bin names
-  ;; these are default not when installing rtags with apt
-  (setq rtags-rc-binary-name "rtags-rc")
-  (setq rtags-rdm-binary-name "rtags-rdm")
-  )
-
-
 ;;;;;;;;
 ;; HS ;;
 ;;;;;;;;
@@ -396,6 +224,7 @@
 	("C-c C-<" . mc/mark-all-like-this))
   )
 
+
 ;;;;;;;;;;;;;;;
 ;; helm-dash ;;
 ;;;;;;;;;;;;;;;
@@ -409,4 +238,175 @@
     (setq-local helm-dash-docsets '("C++")))
   (add-hook 'c-mode-hook 'cpp-doc)
   (add-hook 'c++-mode-hook 'cpp-doc)
+  )
+
+
+;;;;;;;;;;;;;;
+;; Flycheck ;;
+;;;;;;;;;;;;;;
+;; On-the-fly syntax checking for GNU Emacs 24.
+;;
+;; NB: Flycheck and/or popup causes emacs to crash on Win32
+;;
+; (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-20150802.212")
+; (require 'flycheck)
+; (add-hook 'after-init-hook #'global-flycheck-mode)
+
+
+;; The errors are now displayed by popup, instead of printing into the echo
+;; area.
+; (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-tip-20150726.156")
+; (add-to-list 'load-path "~/.emacs.d/elpa/popup-20150626.711")
+; (require 'flycheck-tip)
+; (flycheck-tip-use-timer 'verbose)
+
+
+
+;;;;;;;;;;;
+;; Irony ;;
+;;;;;;;;;;;
+;;
+;; After first set up run
+;;   M-x irony-install-server
+;; this will will build the irony-server application
+;;
+;; Setup a project with cmake
+;;   o Add the argument
+;;       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+;;     to cmake. It will create the command_commands.json file in the build
+;;     directory.
+;;
+(use-package irony
+   :ensure t
+	     
+   :config
+   (add-hook 'c++-mode-hook 'irony-mode)
+   (add-hook 'c-mode-hook 'irony-mode)
+   (add-hook 'objc-mode-hook 'irony-mode)
+
+   ;; replace the `completion-at-point' and `complete-symbol' bindings in
+   ;; irony-mode's buffers by irony-mode's function
+   (defun my-irony-mode-hook ()
+     (define-key irony-mode-map [remap completion-at-point]
+       'irony-completion-at-point-async)
+     (define-key irony-mode-map [remap complete-symbol]
+       'irony-completion-at-point-async))
+   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+   ;; Only needed on Windows
+   (when (eq system-type 'windows-nt)
+     (setq w32-pipe-read-delay 0))
+   
+   )
+
+
+
+;;;;;;;;;;;;;
+;; Company ;;
+;;;;;;;;;;;;;
+;; Company is a modular completion mechanism.  Modules for retrieving completion
+;; candidates are called back-ends, modules for displaying them are front-ends.
+(use-package company
+   :ensure t
+	     
+   :config
+   (add-hook 'after-init-hook 'global-company-mode)
+   
+   ;; Use clang backend for company
+   ;;
+   ;; In case company-semantic via CEDET was activated remove it here again,
+   ;; s.t. clang backend can be used.
+   (setq company-backends (delete 'company-semantic company-backends))
+   
+   ;; Use tab for completation for C(++)
+   (add-hook 'c-mode-common-hook
+	     (lambda()
+	       ;; backtab = shift-tab
+	       ;; (define-key c-mode-base-map [(backtab)] 'company-complete)
+	       (define-key c-mode-base-map (kbd "<C-tab>") 'company-complete)
+	    ))
+   )
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;; Company-C-Headers ;;
+;;;;;;;;;;;;;;;;;;;;;;;
+(use-package company-c-headers
+   :ensure t
+
+   :config
+   (add-to-list 'company-backends 'company-c-headers)
+
+   ;; Add additional c++ pathes
+   (add-hook 'c-mode-common-hook
+	     (lambda()
+	       (if (eq system-type 'gnu/linux)
+		   (progn 
+		     (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")      
+		     ))))
+   )
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Company-Quitckhelp ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Shows doxygen help as overlay for company-compeltion listing
+;;
+;; I.e. the same information is displayed as can be accessed by pressing <f1> if
+;; company-completion listing is shown.
+(use-package company-quickhelp
+  :ensure t
+  :config
+  (company-quickhelp-mode 1)
+  )
+
+;;;;;;;;;;;;;;;;;;;
+;; Company-Irony ;;
+;;;;;;;;;;;;;;;;;;;
+;; Irony backend for company
+(use-package company-irony
+   :ensure t
+   :config
+   (eval-after-load 'company
+     '(add-to-list 'company-backends 'company-irony))
+   (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+   )    
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Company-Irony-C-Headers ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (add-to-list 'load-path "~/.emacs.d/elpa/company-irony-c-headers-20150728.2335")
+;; (require 'company-irony-c-headers)
+;; ;; Load with `irony-mode` as a grouped backend
+;; (eval-after-load 'company
+;;   '(add-to-list
+;;     'company-backends '(company-irony-c-headers company-irony)))
+
+
+
+;;;;;;;;;;;
+;; rtags ;;
+;;;;;;;;;;;
+(use-package rtags
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+
+  ;; Keybindings
+  (rtags-enable-standard-keybindings)
+
+  (setq rtags-autostart-diagnostics t)
+  (rtags-diagnostics)
+  
+  (setq rtags-use-helm t)
+
+  ;; Use rtags as company backend
+  (setq rtags-completions-enabled t)    
+  (require 'company)
+  (push 'company-rtags company-backends)
+
+  ;; set different bin names
+  ;; these are default not when installing rtags with apt
+  (setq rtags-rc-binary-name "rtags-rc")
+  (setq rtags-rdm-binary-name "rtags-rdm")
   )
