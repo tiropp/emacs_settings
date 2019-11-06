@@ -262,151 +262,171 @@
 
 
 
-;;;;;;;;;;;
-;; Irony ;;
-;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; COMPLETION FRAMEWORKS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; The following part will add completion frameworks. There are quite a few
+;; around. Since some of them can be combined, and some cannot, below defines
+;; first some configuration setting variables. When the variables are set to
+;; true, then the framwork is activated.
 ;;
-;; After first set up run
-;;   M-x irony-install-server
-;; this will will build the irony-server application
-;;
-;; Setup a project with cmake
-;;   o Add the argument
-;;       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-;;     to cmake. It will create the command_commands.json file in the build
-;;     directory.
-;;
-(use-package irony
-   :ensure t
+(setq use-irony t)
+(setq use-company t)
+(setq use-rtags t)
+
+
+
+(when (eq use-irony t)
+  ;;;;;;;;;;;
+  ;; Irony ;;
+  ;;;;;;;;;;;
+  ;;
+  ;; After first set up run
+  ;;   M-x irony-install-server
+  ;; this will will build the irony-server application
+  ;;
+  ;; Setup a project with cmake
+  ;;   o Add the argument
+  ;;       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+  ;;     to cmake. It will create the command_commands.json file in the build
+  ;;     directory.
+  ;;
+  (use-package irony
+    :ensure t
 	     
-   :config
-   (add-hook 'c++-mode-hook 'irony-mode)
-   (add-hook 'c-mode-hook 'irony-mode)
-   (add-hook 'objc-mode-hook 'irony-mode)
+    :config
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
 
-   ;; replace the `completion-at-point' and `complete-symbol' bindings in
-   ;; irony-mode's buffers by irony-mode's function
-   (defun my-irony-mode-hook ()
-     (define-key irony-mode-map [remap completion-at-point]
-       'irony-completion-at-point-async)
-     (define-key irony-mode-map [remap complete-symbol]
-       'irony-completion-at-point-async))
-   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    ;; replace the `completion-at-point' and `complete-symbol' bindings in
+    ;; irony-mode's buffers by irony-mode's function
+    (defun my-irony-mode-hook ()
+      (define-key irony-mode-map [remap completion-at-point]
+	'irony-completion-at-point-async)
+      (define-key irony-mode-map [remap complete-symbol]
+	'irony-completion-at-point-async))
+    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
-   ;; Only needed on Windows
-   (when (eq system-type 'windows-nt)
-     (setq w32-pipe-read-delay 0))
-   
-   )
-
-
-
-;;;;;;;;;;;;;
-;; Company ;;
-;;;;;;;;;;;;;
-;; Company is a modular completion mechanism.  Modules for retrieving completion
-;; candidates are called back-ends, modules for displaying them are front-ends.
-(use-package company
-   :ensure t
-	     
-   :config
-   (add-hook 'after-init-hook 'global-company-mode)
-   
-   ;; Use clang backend for company
-   ;;
-   ;; In case company-semantic via CEDET was activated remove it here again,
-   ;; s.t. clang backend can be used.
-   (setq company-backends (delete 'company-semantic company-backends))
-   
-   ;; Use tab for completation for C(++)
-   (add-hook 'c-mode-common-hook
-	     (lambda()
-	       ;; backtab = shift-tab
-	       ;; (define-key c-mode-base-map [(backtab)] 'company-complete)
-	       (define-key c-mode-base-map (kbd "<C-tab>") 'company-complete)
-	    ))
-   )
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;; Company-C-Headers ;;
-;;;;;;;;;;;;;;;;;;;;;;;
-(use-package company-c-headers
-   :ensure t
-
-   :config
-   (add-to-list 'company-backends 'company-c-headers)
-
-   ;; Add additional c++ pathes
-   (add-hook 'c-mode-common-hook
-	     (lambda()
-	       (if (eq system-type 'gnu/linux)
-		   (progn 
-		     (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")      
-		     ))))
-   )
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-;; Company-Quitckhelp ;;
-;;;;;;;;;;;;;;;;;;;;;;;;
-;; Shows doxygen help as overlay for company-compeltion listing
-;;
-;; I.e. the same information is displayed as can be accessed by pressing <f1> if
-;; company-completion listing is shown.
-(use-package company-quickhelp
-  :ensure t
-  :config
-  (company-quickhelp-mode 1)
-  )
-
-;;;;;;;;;;;;;;;;;;;
-;; Company-Irony ;;
-;;;;;;;;;;;;;;;;;;;
-;; Irony backend for company
-(use-package company-irony
-   :ensure t
-   :config
-   (eval-after-load 'company
-     '(add-to-list 'company-backends 'company-irony))
-   (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-   )    
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Company-Irony-C-Headers ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (add-to-list 'load-path "~/.emacs.d/elpa/company-irony-c-headers-20150728.2335")
-;; (require 'company-irony-c-headers)
-;; ;; Load with `irony-mode` as a grouped backend
-;; (eval-after-load 'company
-;;   '(add-to-list
-;;     'company-backends '(company-irony-c-headers company-irony)))
+    ;; Only needed on Windows
+    (when (eq system-type 'windows-nt)
+      (setq w32-pipe-read-delay 0))
+    
+    )
+)
 
 
+(when (eq use-company t)
+  ;;;;;;;;;;;;;
+  ;; Company ;;
+  ;;;;;;;;;;;;;
+  ;; Company is a modular completion mechanism.  Modules for retrieving completion
+  ;; candidates are called back-ends, modules for displaying them are front-ends.
+  (use-package company
+    :ensure t
+    
+    :config
+    (add-hook 'after-init-hook 'global-company-mode)
+    
+    ;; Use clang backend for company
+    ;;
+    ;; In case company-semantic via CEDET was activated remove it here again,
+    ;; s.t. clang backend can be used.
+    (setq company-backends (delete 'company-semantic company-backends))
+    
+    ;; Use tab for completation for C(++)
+    (add-hook 'c-mode-common-hook
+	      (lambda()
+		;; backtab = shift-tab
+		;; (define-key c-mode-base-map [(backtab)] 'company-complete)
+		(define-key c-mode-base-map (kbd "<C-tab>") 'company-complete)
+		))
+    )
 
-;;;;;;;;;;;
-;; rtags ;;
-;;;;;;;;;;;
-(use-package rtags
-  :ensure t
-  :config
-  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+  ;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Company-C-Headers ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;
+  (use-package company-c-headers
+    :ensure t
 
-  ;; Keybindings
-  (rtags-enable-standard-keybindings)
+    :config
+    (add-to-list 'company-backends 'company-c-headers)
 
-  (setq rtags-autostart-diagnostics t)
-  (rtags-diagnostics)
-  
-  (setq rtags-use-helm t)
+    ;; Add additional c++ pathes
+    (add-hook 'c-mode-common-hook
+	      (lambda()
+		(if (eq system-type 'gnu/linux)
+		    (progn 
+		      (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")      
+		      ))))
+    )
 
-  ;; Use rtags as company backend
-  (setq rtags-completions-enabled t)    
-  (require 'company)
-  (push 'company-rtags company-backends)
+  ;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Company-Quitckhelp ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Shows doxygen help as overlay for company-compeltion listing
+  ;;
+  ;; I.e. the same information is displayed as can be accessed by pressing <f1> if
+  ;; company-completion listing is shown.
+  (use-package company-quickhelp
+    :ensure t
+    :config
+    (company-quickhelp-mode 1)
+    )
 
-  ;; set different bin names
-  ;; these are default not when installing rtags with apt
-  (setq rtags-rc-binary-name "rtags-rc")
-  (setq rtags-rdm-binary-name "rtags-rdm")
-  )
+  (when (eq use-irony t)
+    ;;;;;;;;;;;;;;;;;;;
+    ;; Company-Irony ;;
+    ;;;;;;;;;;;;;;;;;;;			
+    ;; Irony backend for company
+    (use-package company-irony
+      :ensure t
+      :config
+      (eval-after-load 'company
+	'(add-to-list 'company-backends 'company-irony))
+      (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+      )    
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; Company-Irony-C-Headers ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; (add-to-list 'load-path "~/.emacs.d/elpa/company-irony-c-headers-20150728.2335")
+    ;; (require 'company-irony-c-headers)
+    ;; ;; Load with `irony-mode` as a grouped backend
+    ;; (eval-after-load 'company
+    ;;   '(add-to-list
+    ;;     'company-backends '(company-irony-c-headers company-irony)))
+    )
+)
+
+
+(when (eq use-rtags t)
+  ;;;;;;;;;;;
+  ;; rtags ;;
+  ;;;;;;;;;;;
+  (use-package rtags
+    :ensure t
+    :config
+    (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+    (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+
+    ;; Keybindings
+    (rtags-enable-standard-keybindings)
+
+    (setq rtags-autostart-diagnostics t)
+    (rtags-diagnostics)
+    
+    (setq rtags-use-helm t)
+
+    ;; Use rtags as company backend
+    (setq rtags-completions-enabled t)    
+    (require 'company)
+    (push 'company-rtags company-backends)
+
+    ;; set different bin names
+    ;; these are default not when installing rtags with apt
+    (setq rtags-rc-binary-name "rtags-rc")
+    (setq rtags-rdm-binary-name "rtags-rdm")
+    )
+)
