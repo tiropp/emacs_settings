@@ -116,11 +116,12 @@
 ;;
 ;; only turn on if a window system is available
 ;; this prevents error under terminal that does not support X
-(use-package nyan-mode
-   :ensure t
-   :config
-   (case window-system
-	 ((x w32) (nyan-mode))))
+;; (use-package nyan-mode
+;;    :ensure t
+;;    :config
+;;    (case window-system
+;;      ((x w32) (nyan-mode))))
+
 ;(add-to-list 'load-path "~/.emacs.d/elpa/nyan-mode-20150128.1218")
 ;(require 'nyan-mode)
 ;(case window-system
