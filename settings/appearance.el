@@ -127,6 +127,19 @@
   )
 
 
+;; Change the default git string in mode line from
+;;   Git:master
+:: to
+::   git-branch-symbol(f126 in awsome-font):master
+;;
+(defun my-vc-git-mode-line-string (orig-fn &rest args)
+  "Replace Git in modeline with font-awesome git icon via ORIG-FN and ARGS."
+  (let ((str (apply orig-fn args)))
+    (concat [#xF126] ":" (substring-no-properties str 4))))
+(advice-add #'vc-git-mode-line-string :around #'my-vc-git-mode-line-string)
+
+
+
 ;;;;;;;;;;;;;;;;;
 ;; Color-Theme ;;
 ;;;;;;;;;;;;;;;;;
