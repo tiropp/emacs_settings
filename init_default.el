@@ -91,3 +91,8 @@
 ;; XAML ;;
 ;;;;;;;;;;
 (load-file "~/.emacs.d/settings/xaml.el")
+
+;;;;;;;;;;
+;; YAML ;;
+;;;;;;;;;;
+(load-file "~/.emacs.d/settings/yaml.el")
