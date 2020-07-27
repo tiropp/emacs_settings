@@ -8,6 +8,7 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown")
+  :hook (markdown-mode . flyspell-mode)
   )
 
 (use-package flymd
