@@ -67,6 +67,11 @@
 ;;;;;;;;;
 (load-file "~/.emacs.d/settings/elm.el")
 
+;;;;;;;;;;;;;
+;; HASKELL ;;
+;;;;;;;;;;;;;
+(load-file "~/.emacs.d/settings/haskell.el")
+
 ;;;;;;;;;
 ;; SSH ;;
 ;;;;;;;;;
