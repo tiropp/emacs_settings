@@ -192,7 +192,11 @@
 (use-package ws-butler
    :ensure t
    :config
-   (add-hook 'c-mode-common-hook 'ws-butler-mode))
+   (add-hook 'c-mode-common-hook 'ws-butler-mode)
+   (add-hook 'elm-mode-hook 'ws-butler-mode)
+   (add-hook 'prog-mode-hook 'ws-butler-mode)
+   (add-hook 'gfm-mode-hook 'ws-butler-mode)
+   )
 
 
 ;;;;;;;;
