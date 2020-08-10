@@ -37,3 +37,36 @@
 ;;   )
 ;; (add-hook  'csharp-mode-hook 'my-csharp-mode-fn t)
 
+;;
+;; OmniSharp
+;;
+;; Don't forget to start the omnisharp server with
+;;  M-x omnisharp-start-omnisharp-server
+;;
+(use-package omnisharp
+  :ensure t
+  :after company
+  :after csharp-mode
+  :hook ((omnisharp-mode . configure-omnisharp)
+	 (csharp-mode . omnisharp-mode)
+
+	 ;; Flycheck
+	 (csharp-mode . flycheck-mode))
+
+  :config
+  (progn
+    (defun configure-omnisharp ()
+      ;; Use company for completion
+      (add-tolist 'company-backends #'company-omnisharp)
+
+      (csharp-mode . omnisharp-mode)))
+
+  ;; Keys
+  :bind (:map omnisharp-mode-map
+  	      ("." . omnisharp-add-dot-and-auto-complete)
+  	      ("<C-SPC>" . omnisharp-auto-complete)
+  	      ("M-." . omnisharp-go-to-definition-other-window)
+  	      ("M-?" . omnisharp-find-usages)
+	      ("C-c s r" . omnisharp-rename)
+  	      )
+  )
