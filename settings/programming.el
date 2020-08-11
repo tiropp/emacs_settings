@@ -480,3 +480,11 @@
 ;;;;;;;;;;;;;;;;
 ;; The default indent for most typescripts seems to be 2, so let's stick to it.
 (setq-default typescript-indent-level 2)
+
+
+;;;;;;;;;;;;;;;;
+;; POWERSHELL ;;
+;;;;;;;;;;;;;;;;
+(use-package powershell
+  :ensure t
+  )
