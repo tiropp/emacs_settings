@@ -94,6 +94,9 @@
   :ensure t)
 (use-package magit-popup
   :ensure t)
+(use-package magit-lfs
+  :ensure t
+  :pin melpa)
 
 ;;;;;;;;;;
 ;; dsvn ;;
