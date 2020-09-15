@@ -14,3 +14,16 @@
 (use-package flymd
   :ensure t
   )
+
+;; Live preview
+;;
+;; Since flymd has problems with firefox above version 68
+;;
+;; Requires multimarkdown perl script. (In debian this is contained in the
+;; package libtext-markdown-perl)
+;;
+;; Run the markdown and open browser with command: markdown-preview-mode
+;;
+(use-package markdown-preview-mode
+  :ensure t
+  )
