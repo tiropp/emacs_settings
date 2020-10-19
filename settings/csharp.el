@@ -64,7 +64,7 @@
   ;; Keys
   :bind (:map omnisharp-mode-map
   	      ("." . omnisharp-add-dot-and-auto-complete)
-  	      ("<C-SPC>" . omnisharp-auto-complete)
+  	      ("<C-S-SPC>" . omnisharp-auto-complete)
   	      ("M-." . omnisharp-go-to-definition-other-window)
   	      ("M-?" . omnisharp-find-usages)
 	      ("C-c s r" . omnisharp-rename)
