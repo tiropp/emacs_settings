@@ -101,3 +101,8 @@
 ;; YAML ;;
 ;;;;;;;;;;
 (load-file "~/.emacs.d/settings/yaml.el")
+
+;;;;;;;;;;;;;;;;;
+;; DOCKER FILE ;;
+;;;;;;;;;;;;;;;;;
+(load-file "~/.emacs.d/settings/dockerfile.el")
