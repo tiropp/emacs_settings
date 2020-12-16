@@ -494,3 +494,18 @@
 (use-package powershell
   :ensure t
   )
+
+
+;;;;;;;;;;;;
+;; PYTHON ;;
+;;;;;;;;;;;;
+;; somehow when used within use-package anaconda-mode, the variable is set but
+;; not correctly picked-up by anconda. Hence set it before anaconda-mode setup
+(setq python-shell-interpreter "python3")
+
+;; See https://github.com/pythonic-emacs/anaconda-mode
+(use-package anaconda-mode
+  :ensure t
+  :config
+  :hook ((python-mode) 'anaconda-mode)
+  )
