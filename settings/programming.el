@@ -482,7 +482,7 @@
 (use-package typescript
   :ensure t
   :config
-  (setq-default typescript-indent-level 4)
+  (setq-default typescript-indent-level 2)
   :hook ((typescript-mode) .
 	 (lambda() (setq indent-tabs-mode nil)))
 )
