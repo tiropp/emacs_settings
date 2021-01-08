@@ -509,3 +509,11 @@
   :config
   :hook ((python-mode) 'anaconda-mode)
   )
+
+
+;;;;;;;;;;;;;;;
+;; TERRAFORM ;;
+;;;;;;;;;;;;;;;
+(use-package terraform-mode
+  :ensure t
+  )
