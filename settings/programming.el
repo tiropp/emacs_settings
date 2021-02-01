@@ -479,7 +479,7 @@
 ;; TYPESCRIPT ;;
 ;;;;;;;;;;;;;;;;
 ;; The default indent for most typescripts seems to be 2, so let's stick to it.
-(use-package typescript
+(use-package typescript-mode
   :ensure t
   :config
   (setq-default typescript-indent-level 2)
