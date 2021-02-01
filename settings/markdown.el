@@ -26,4 +26,14 @@
 ;;
 (use-package markdown-preview-mode
   :ensure t
+  :config
+  (setq markdown-preview--http-server 9322)
+  (add-to-list 'markdown-preview-stylesheets
+	       "<style type = text/css>html {font-family: 'Source Code Pro', sans-serif;}</style><link href='https://fonts.googleapis.com/css?family=Source Code Pro' rel='stylesheet'>")
   )
+
+; (setq markdown-preview-stylesheets
+; 	(list
+;    	    "http://thomasf.github.io/solarized-css/solarized-dark.min.css"
+; 	    "<style type = text/css>html {font-family: 'Source Code Pro', sans-serif;}</style><link href='https://fonts.googleapis.com/css?family=Source Code Pro' rel='stylesheet'>"
+; 		))
