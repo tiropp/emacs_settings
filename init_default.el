@@ -106,3 +106,8 @@
 ;; DOCKER FILE ;;
 ;;;;;;;;;;;;;;;;;
 (load-file "~/.emacs.d/settings/dockerfile.el")
+
+;;;;;;;;;
+;; WEB ;;
+;;;;;;;;;
+(load-file "~/.emacs.d/settings/web.el")
