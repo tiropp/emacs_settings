@@ -489,6 +489,12 @@
 
 
 ;;;;;;;;;;;;;;;;
+;; JAVASCRIPT ;;
+;;;;;;;;;;;;;;;;
+(setq js-indent-level 2)
+
+
+;;;;;;;;;;;;;;;;
 ;; POWERSHELL ;;
 ;;;;;;;;;;;;;;;;
 (use-package powershell
