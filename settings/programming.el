@@ -557,3 +557,19 @@
     (setq meghanada-java-path "java")
     (setq meghanada-maven-path "mvn")))
   )
+
+
+;;;;;;;;;;
+;; JSON ;;
+;;;;;;;;;;
+;; flymake-json requires jsonlint. Install jsonlint with
+;;  > npm install -g jsonlint
+;;
+(use-package json-mode
+  :ensure t)
+(use-package flymake-json
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+  :hook
+  ((json-mode) . (lambda () (flymake-json-load))))
