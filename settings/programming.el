@@ -516,6 +516,14 @@
   :hook ((python-mode) 'anaconda-mode)
   )
 
+;; Code formatting
+;; Need to install black with
+;;   > pip install black
+(use-package python-black
+  :ensure t
+  :after python
+  :hook (python-mode . python-black-on-save-mode-enable-dwim))
+
 
 ;;;;;;;;;;;;;;;
 ;; TERRAFORM ;;
