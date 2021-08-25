@@ -513,7 +513,7 @@
 (use-package anaconda-mode
   :ensure t
   :config
-  :hook ((python-mode) 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-mode)
   )
 
 ;; Code formatting
