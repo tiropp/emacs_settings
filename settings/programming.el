@@ -482,7 +482,12 @@
   (use-package helm-xref
     :ensure t
   )
-  
+  (use-package which-key
+    :ensure t
+    :config
+    (which-key-mode)
+    )
+
   ;; use debugger
   ;; (use-package dap-mode
   ;;   :ensure t
