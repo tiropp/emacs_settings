@@ -280,7 +280,7 @@
 (setq use-irony nil)
 (setq use-company t)
 (setq use-rtags nil)
-(setq use-ccls t)
+(setq use-lsp t)
 
 
 
@@ -440,7 +440,7 @@
 )
 
 
-(when (eq use-ccls t)
+(when (eq use-lsp t)
   (use-package lsp-mode
     :ensure t
     :commands lsp
