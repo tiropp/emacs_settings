@@ -441,8 +441,30 @@
 
 
 (when (eq use-lsp t)
+  ;; You still need to install language servers with M-x lsp-install-server
+  ;; then select the language.
+  ;;
+  ;; For language servers installation see https://emacs-lsp.github.io/lsp-mode/page/languages/
+  ;;
+  ;; C/C++:
+  ;;   Install clangd language server with with
+  ;;     > apt isntall clangd
+  ;;
+  ;; C#:
+  ;;  Install language server with M-x lsp-install-server and select server
+  ;;  'csharp'
   (use-package lsp-mode
     :ensure t
+    :init
+    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+    (setq lsp-keymap-prefix "C-l")
+    :hook (((c-mode c++-mode python-mode csharp-mode) . lsp)
+	   (csharp-mode . lsp)
+	   ;; if you want which-key integration
+           (lsp-mode . lsp-enable-which-key-integration))
+    :config
+    (add-to-list 'lsp-enabled-clients 'clangd)
+    (add-to-list 'lsp-enabled-clients 'csharp)
     :commands lsp
     )
   (use-package lsp-ui
@@ -467,11 +489,25 @@
   ;; )
   ;; (use-package dap-LANGUAGE)
 
-  (use-package ccls
+  ;; c/c++ language server
+  ;; (use-package ccls
+  ;;   :ensure t
+  ;;   :hook ((c-mode c++-mode) .
+  ;; 	   (lambda() (require 'ccls) (lsp)))
+  ;;   :config
+  ;;   (with-eval-after-load "lsp-mode"
+  ;;     (add-to-list 'lsp-enabled-clients 'ccls))
+  ;;   )
+
+  ;; python language server
+  ;; install jedi language server with
+  ;;   > pip3 install -U jedi-language-server
+  (use-package lsp-jedi
     :ensure t
-    :hook ((c-mode c++-mode) .
-	   (lambda() (require 'ccls) (lsp)))
-    )
+    :config
+    (with-eval-after-load "lsp-mode"
+      (add-to-list 'lsp-disabled-clients 'pyls)
+      (add-to-list 'lsp-enabled-clients 'jedi)))
 )
 
 
