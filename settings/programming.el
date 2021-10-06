@@ -550,6 +550,14 @@
   :ensure t
   )
 
+;; web-beautify extension to minify JS code
+;;
+;; In order to use the command of this extension the uglifyjs NPM package must
+;; be installed:
+;;   > npm i -g uglify
+;;
+(load-file "~/.emacs.d/packages/web-uglifyjs/web-uglifyjs.el")
+
 
 ;;;;;;;;;;;;;;;;
 ;; POWERSHELL ;;
