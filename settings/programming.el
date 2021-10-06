@@ -534,6 +534,22 @@
 ;;;;;;;;;;;;;;;;
 (setq js-indent-level 2)
 
+(use-package ac-js2
+  :ensure t
+  )
+(use-package js2-mode
+  :ensure t
+  :hook ((js-mode . js2-minor-mode)
+	 (js2-mode . ac-js2-mode))
+  )
+
+;; You need to install js-beautify npm package with
+;;  > npm i -g js-beautify
+;; Use e.g. then function web-beautify-js to beautify JS code
+(use-package web-beautify
+  :ensure t
+  )
+
 
 ;;;;;;;;;;;;;;;;
 ;; POWERSHELL ;;
