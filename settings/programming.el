@@ -455,17 +455,23 @@
   ;;  'csharp'
   (use-package lsp-mode
     :ensure t
-    :init
-    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-    (setq lsp-keymap-prefix "C-l")
-    :hook (((c-mode c++-mode python-mode csharp-mode) . lsp)
+    :hook ((c-mode . lsp)
+	   (c++-mode . lsp)
+	   (python-mode . lsp)
 	   (csharp-mode . lsp)
+
 	   ;; if you want which-key integration
-           (lsp-mode . lsp-enable-which-key-integration))
+	   (lsp-mode . (lambda ()
+			 (let ((lsp-keymap-prefix "C-c p"))
+                           (lsp-enable-which-key-integration)))))
     :config
+    ;; Set prefix for lsp-command's, default "s-l", few alternatives - "C-l", "C-c l"
+    ;; Don't use '(setq lsp-keymap-prefix "C-c p")' it's not working anymore
+    (define-key lsp-mode-map (kbd "C-c p") lsp-command-map)
+
     (add-to-list 'lsp-enabled-clients 'clangd)
-    (add-to-list 'lsp-enabled-clients 'csharp)
-    :commands lsp
+    (add-to-list 'lsp-enabled-clients 'omnisharp)
+    :commands lsp lsp-deferred
     )
   (use-package lsp-ui
     :ensure t
@@ -513,6 +519,9 @@
     (with-eval-after-load "lsp-mode"
       (add-to-list 'lsp-disabled-clients 'pyls)
       (add-to-list 'lsp-enabled-clients 'jedi)))
+
+  ;; C# language server
+  ;; use lsp-install-server then choose omnisharp
 )
 
 

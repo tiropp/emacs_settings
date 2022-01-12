@@ -43,30 +43,35 @@
 ;; Don't forget to start the omnisharp server with
 ;;  M-x omnisharp-start-omnisharp-server
 ;;
-(use-package omnisharp
-  :ensure t
-  :after company
-  :after csharp-mode
-  :hook ((omnisharp-mode . configure-omnisharp)
-	 (csharp-mode . omnisharp-mode)
+;; NB: We use now LSP instead of omnisharp direcly, see programming.el.
+(setq use-omnisharp nil)
 
-	 ;; Flycheck
-	 (csharp-mode . flycheck-mode))
+(when(eq use-omnisharp t)
+  (use-package omnisharp
+    :ensure t
+    :after company
+    :after csharp-mode
+    :hook ((omnisharp-mode . configure-omnisharp)
+	   (csharp-mode . omnisharp-mode)
 
-  :config
-  (progn
-    (defun configure-omnisharp ()
-      ;; Use company for completion
-      (add-tolist 'company-backends #'company-omnisharp)
+	   ;; Flycheck
+	   (csharp-mode . flycheck-mode))
 
-      (csharp-mode . omnisharp-mode)))
+    :config
+    (progn
+      (defun configure-omnisharp ()
+	;; Use company for completion
+	(add-tolist 'company-backends #'company-omnisharp)
 
-  ;; Keys
-  :bind (:map omnisharp-mode-map
-  	      ("." . omnisharp-add-dot-and-auto-complete)
-  	      ("<C-S-SPC>" . omnisharp-auto-complete)
-  	      ("M-." . omnisharp-go-to-definition-other-window)
-  	      ("M-?" . omnisharp-find-usages)
-	      ("C-c s r" . omnisharp-rename)
-  	      )
-  )
+	(csharp-mode . omnisharp-mode)))
+
+    ;; Keys
+    :bind (:map omnisharp-mode-map
+  		("." . omnisharp-add-dot-and-auto-complete)
+  		("<C-S-SPC>" . omnisharp-auto-complete)
+  		("M-." . omnisharp-go-to-definition-other-window)
+  		("M-?" . omnisharp-find-usages)
+		("C-c s r" . omnisharp-rename)
+  		)
+    )
+)
