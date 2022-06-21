@@ -83,3 +83,11 @@
 ;; The access lables (private, protected, public) shall be indented with
 ;; (4-2 = 2) spaces.
 (c-set-offset 'access-label -2)
+
+;;
+;; clang-formats
+;;
+;; NB: Source tree must contain .clang-format file to work proplery.
+(use-package clang-format+
+  :ensure t
+  :hook (c-mode-common . clang-format+-mode))
