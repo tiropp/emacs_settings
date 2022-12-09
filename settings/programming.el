@@ -471,6 +471,13 @@
 
     (add-to-list 'lsp-enabled-clients 'clangd)
     (add-to-list 'lsp-enabled-clients 'omnisharp)
+
+    ;; Change some lsp performance factors, see lsp-doctor and page [1]
+    ;; [1]     ;; See recommendation on page https://emacs-lsp.github.io/lsp-mode/page/performance
+    ;; Set garbage collector size
+    (setq gc-cons-threshold 100000000)
+    ;; Change data read size to 1 MB
+    (setq read-process-output-max (* 1024 1024))
     :commands lsp lsp-deferred
     )
   (use-package lsp-ui
