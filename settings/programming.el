@@ -478,6 +478,12 @@
     (setq gc-cons-threshold 100000000)
     ;; Change data read size to 1 MB
     (setq read-process-output-max (* 1024 1024))
+
+    ;; C#
+    ;; Use csharp-ls lang server instaed of omnisharp
+    (add-to-list 'lsp-disabled-clients 'omnisharp)
+    (add-to-list 'lsp-enabled-clients 'csharp-ls)
+
     :commands lsp lsp-deferred
     )
   (use-package lsp-ui
@@ -524,7 +530,13 @@
       (add-to-list 'lsp-enabled-clients 'jedi)))
 
   ;; C# language server
-  ;; use lsp-install-server then choose omnisharp
+  ;;;; omnisharp
+  ;;;; use lsp-install-server then choose omnisharp
+  ;;;;
+  ;;;; csharp-ls
+  ;;;; Install package with:
+  ;;;;   > dotnet tool install --global csharp-ls
+  ;;;; In emacs install lang server with M+x lsp-install-server then choose csharp-ls
 )
 
 
