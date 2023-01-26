@@ -540,6 +540,25 @@
 )
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; DAP (Debug Adapter Protocol ) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package dap-mode
+  :ensure t
+  )
+
+;; DAP adapter for c++/vscode
+;; see documentation https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/
+;;
+;; NB: Run M-x dap-cpptools-setup install adapter
+;;
+;; Run dap-debug-edit-template and finally dap-debug to start debugging.
+(use-package dap-cpptools
+  ;; is part of dap-mode package, hence ensure nil.
+  :ensure nil
+  )
+
+
 ;;;;;;;;;;;;;;;;
 ;; TYPESCRIPT ;;
 ;;;;;;;;;;;;;;;;
