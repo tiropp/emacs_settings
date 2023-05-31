@@ -689,3 +689,45 @@
   (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
   :hook
   ((json-mode) . (lambda () (flymake-json-load))))
+
+
+;;;;;;;;;;;;;
+;; JENKINS ;;
+;;;;;;;;;;;;;
+;; Jenkins file mode
+(use-package jenkinsfile-mode
+  :ensure t)
+
+
+;;;;;;;;;;;;
+;; Qt QML ;;
+;;;;;;;;;;;;
+(use-package qml-mode
+  :ensure t
+  :hook
+  ((js-mode) .
+   (lambda()
+    (setq indent-tabs-mode t
+	  tab-width 4
+	  js-indent-level 4))))
+
+
+;;;;;;;;;;;;
+;; GROOVY ;;
+;;;;;;;;;;;;
+(use-package groovy-mode
+  :ensure t
+  :hook
+  ((groovy-mode) .
+   (lambda()
+     ;; BERNINA
+     (setq tab-width 4))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; OpenGL Shader Language ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package glsl-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.gsl\\'" . glsl-mode)))
