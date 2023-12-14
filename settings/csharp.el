@@ -1,12 +1,8 @@
 ;;
 ;; C# configuration
 ;;
-(use-package csharp-mode
-  :ensure t
-  :config
-  (add-hook 'csharp-mode-hook (lambda() (setq indent-tabs-mode nil)))
-  )
-	    
+(add-hook 'csharp-mode-hook (lambda() (setq indent-tabs-mode nil)))
+
 ;; ;; Custom code to use a default compiler string for all C# files
 ;; ;; This is for flymake which per default expects the compiler to be csc.exe
 ;; (defvar my-csharp-default-compiler nil)
