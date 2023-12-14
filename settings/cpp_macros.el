@@ -88,6 +88,15 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
 
 
 ;;
+;; cpp-format-comment-paragraph
+;;
+(defun cpp-format-comment-paragraph()
+  "Format comment paragraph to use only 80 chars"
+   (interactive)
+   (let ((fill-column 80))
+     (fill-paragraph)))
+
+;;
 ;; cpp-macro-keys
 ;;
 (defun cpp-macro-keys()
@@ -97,6 +106,7 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
   (define-key c-mode-base-map [(control n) (n)] 'cpp-insert-namespace)
   (define-key c-mode-base-map [(control n) (g)] 'cpp-insert-header-guard)
   (define-key c-mode-base-map [(control n) (f)] 'cpp-insert-file-name-without-ending)
+  (define-key c-mode-base-map [(control n) (c)] 'cpp-format-comment-paragraph)
 
   ;; Creating a new menu pane 'C++2' in the menu bar
   (let ((menuMap (make-sparse-keymap "C++2")))  
@@ -108,7 +118,9 @@ namespace by a '.'. E.g. using NAME equal to 'abc.def' would result in
     (define-key menuMap [ig]
       '("Insert Header Guard" . cpp-insert-header-guard))
     (define-key menuMap [if]
-      '("Insert Filename". cpp-insert-file-name-without-ending))))
+      '("Insert Filename". cpp-insert-file-name-without-ending))
+    (define-key menuMap [ic]
+      '("Format Comment". cpp-format-comment-paragraph))))
 
 (add-hook 'c-mode-common-hook
 	  ;; Set the tab size to 4, same as indent size
