@@ -471,6 +471,7 @@
 
     (add-to-list 'lsp-enabled-clients 'clangd)
     (add-to-list 'lsp-enabled-clients 'omnisharp)
+    (add-to-list 'lsp-enabled-clients 'rust-analyzer)
 
     ;; Change some lsp performance factors, see lsp-doctor and page [1]
     ;; [1]     ;; See recommendation on page https://emacs-lsp.github.io/lsp-mode/page/performance
@@ -731,3 +732,18 @@
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.gsl\\'" . glsl-mode)))
+
+
+;;;;;;;;;;
+;; RUST ;;
+;;;;;;;;;;
+(use-package rustic
+  :ensure t
+
+  :config
+  ;; Run rustfmt on save
+  (setq rustic-format-on-save t)
+
+  :custom
+  ;; rust-analyzer taken from rustup apt package
+  (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer")))
