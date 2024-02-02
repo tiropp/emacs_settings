@@ -20,6 +20,12 @@
 ;; Use gtags instead of cedet for code completion
 ;; (load-file "~/.emacs.d/settings/cedet.el")
 
+;;;;;;;;;;;;;;;;;;;;
+;; GLOBAL SWITCH  ;;
+;;;;;;;;;;;;;;;;;;;;
+;; Will activate bernina environment settings
+(setq use-bernina-settings t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; GLOBAL SHORT CUTS ;;
 ;;;;;;;;;;;;;;;;;;;;;;;

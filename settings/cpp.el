@@ -2,7 +2,6 @@
 ;; Define configuration for C++
 ;;
 
-
 ;; C default programming style
 (setq c-default-style
       '((other . "cc-mode")))
@@ -80,9 +79,25 @@
 ;; Open .h file in c++ mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+;; Offsets
+;;
+;; Note: Use C-c C-o to find the name of the offset location.
+;;
 ;; The access lables (private, protected, public) shall be indented with
 ;; (4-2 = 2) spaces.
 (c-set-offset 'access-label -2)
+
+(when (eq use-bernina-settings t)
+  ;; '{' on block beginning shall not be indented,
+  ;; e.g.
+  ;;    if(is_true)
+  ;;    {
+  ;;         ....
+  ;;    }
+  (add-hook 'c-mode-common-hook
+	    (lambda() (c-set-offset 'substatement-open 0)))
+  )
+
 
 ;;
 ;; clang-formats
