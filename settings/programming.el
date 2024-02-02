@@ -442,6 +442,13 @@
 
 
 (when (eq use-lsp t)
+  ;; Use envr package to load file specific env variables
+  ;;
+  ;;
+  (use-package envrc
+    :ensure t
+    :init (envrc-global-mode))
+
   ;; You still need to install language servers with M-x lsp-install-server
   ;; then select the language.
   ;;
@@ -458,7 +465,16 @@
     :ensure t
     :hook ((c-mode . lsp)
 	   (c++-mode . lsp)
-	   (python-mode . lsp)
+
+	   ;; Python mode needs deferred lsp such that envrc can set necessary
+	   ;; env variables e.g. for virtual environment.
+	   ;;
+	   ;; Use something like this '.envrc' file
+	   ;;    VIRTUAL_ENV=.venv
+	   ;;    layout python3
+	   ;;
+	   (python-mode . lsp-deferred)
+
 	   (csharp-mode . lsp)
 
 	   ;; if you want which-key integration
