@@ -465,6 +465,14 @@
 	   (lsp-mode . (lambda ()
 			 (let ((lsp-keymap-prefix "C-c p"))
                            (lsp-enable-which-key-integration)))))
+    :init
+    ;; Bernina default settings shall use flake not lsp for flycheck.
+    ;; Turning of diagnostic for LSP must happend before package is loaded
+    ;; otherwise its too late and will not be properly processed, i.e. LSP
+    ;; remains to be the default checker.
+    (when (eq use-bernina-settings t)
+      (setq lsp-diagnostic-package :none))
+
     :config
     ;; Set prefix for lsp-command's, default "s-l", few alternatives - "C-l", "C-c l"
     ;; Don't use '(setq lsp-keymap-prefix "C-c p")' it's not working anymore
@@ -635,6 +643,14 @@
 ;; Need to install black with
 ;;   > pip install black
 (use-package python-black
+
+;; Bernina settings disable diagnostic mode for lsp, such that lsp isn't used
+;; as default checker, therefore have to enable flycheck for python by hand
+;; here.
+(when (eq use-bernina-settings t)
+  (add-hook 'python-mode-hook 'flycheck-mode))
+
+
   :ensure t
   :after python
   :hook (python-mode . python-black-on-save-mode-enable-dwim))
