@@ -259,14 +259,15 @@
 ; (require 'flycheck)
 ; (add-hook 'after-init-hook #'global-flycheck-mode)
 
-
 ;; The errors are now displayed by popup, instead of printing into the echo
 ;; area.
 ; (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-tip-20150726.156")
 ; (add-to-list 'load-path "~/.emacs.d/elpa/popup-20150626.711")
 ; (require 'flycheck-tip)
 ; (flycheck-tip-use-timer 'verbose)
-
+(use-package flycheck
+  :ensure t
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
