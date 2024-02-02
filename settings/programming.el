@@ -551,14 +551,16 @@
   ;;   )
 
   ;; python language server
+  ;;
   ;; install jedi language server with
   ;;   > pip3 install -U jedi-language-server
   (use-package lsp-jedi
     :ensure t
     :config
-    (with-eval-after-load "lsp-mode"
-      (add-to-list 'lsp-disabled-clients 'pyls)
-      (add-to-list 'lsp-enabled-clients 'jedi)))
+    )
+  ;;
+  ;; install pylsp language server with
+  ;;   > pip3 install -U 'python-lsp-server[all]'
 
   ;; C# language server
   ;;;; omnisharp
