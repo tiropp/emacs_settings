@@ -777,7 +777,10 @@
 ;;;;;;;;;;;;;
 ;; Jenkins file mode
 (use-package jenkinsfile-mode
-  :ensure t)
+  :ensure t
+  :hook ((groovy-mode) .
+	 (lambda() (setq indent-tabs-mode nil)))
+  )
 
 
 ;;;;;;;;;;;;
