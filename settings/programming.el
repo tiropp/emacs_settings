@@ -791,7 +791,7 @@
   :hook
   ((js-mode) .
    (lambda()
-    (setq indent-tabs-mode t
+    (setq indent-tabs-mode nil
 	  tab-width 4
 	  js-indent-level 4))))
 
