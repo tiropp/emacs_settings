@@ -657,6 +657,15 @@
   (add-hook 'python-mode-hook 'anaconda-mode)
   )
 
+(use-package company-jedi
+  :ensure t
+  :config
+  ;; Basic usage.
+  ;; (add-to-list 'company-backends 'company-jedi)
+  ;; Advanced usage.
+  (add-to-list 'company-backends '(company-jedi company-files)))
+
+;;
 ;; Code formatting
 ;;
 (if (eq use-bernina-settings t)
@@ -690,9 +699,19 @@
   (add-hook 'python-mode-hook 'flycheck-mode))
 
 
+;;
+;; Virtuel ENV
+;;
+;; Use pyvenv-activate and select venv directory.
+(use-package pyvenv
+  :ensure t)
+
+;;
+;; pytest
+;;
+(use-package python-pytest
   :ensure t
-  :after python
-  :hook (python-mode . python-black-on-save-mode-enable-dwim))
+  )
 
 
 ;;;;;;;;;;;;;;;
