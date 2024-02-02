@@ -658,9 +658,30 @@
   )
 
 ;; Code formatting
-;; Need to install black with
-;;   > pip install black
-(use-package python-black
+;;
+(if (eq use-bernina-settings t)
+    (progn
+      (setq use-py-black nil)
+      (setq use-py-autopep8 t))
+  (setq use-py-black t)
+  (setq use-py-autopep8 nil))
+
+
+(when (eq use-py-black t)
+  ;; Need to install black with
+  ;;   > pip install black
+  (use-package python-black
+    :ensure t
+    :after python
+    :hook (python-mode . python-black-on-save-mode-enable-dwim)))
+
+(when (eq use-py-autopep8 t)
+  ;; Need to install autopep8 with
+  ;;   > pip install autopep8
+  (use-package py-autopep8
+    :ensure t
+    :after python
+    :hook (python-mode . py-autopep8-mode)))
 
 ;; Bernina settings disable diagnostic mode for lsp, such that lsp isn't used
 ;; as default checker, therefore have to enable flycheck for python by hand
