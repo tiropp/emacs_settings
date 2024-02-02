@@ -486,6 +486,11 @@
     (add-to-list 'lsp-disabled-clients 'omnisharp)
     (add-to-list 'lsp-enabled-clients 'csharp-ls)
 
+    ;; python
+    (add-to-list 'lsp-disabled-clients 'pyls)
+    (add-to-list 'lsp-enabled-clients 'jedi)
+    (add-to-list 'lsp-disabled-clients 'pylsp)
+
     :commands lsp lsp-deferred
     )
   (use-package lsp-ui
