@@ -931,3 +931,17 @@
 
 (use-package inf-clojure
   :ensure t)
+
+
+;;;;;;;;;;;;;;;;
+;; Kubernetes ;;
+;;;;;;;;;;;;;;;;
+;; Put
+;;   # -*- mode: k8s -*-
+;; at the beginning of a kubernetes manifest file to automatically load the k8s
+;; mode.
+(use-package k8s-mode
+ :ensure t
+ :config
+ (setq k8s-search-documentation-browser-function 'browse-url-firefox)
+ :hook (k8s-mode . yas-minor-mode))
