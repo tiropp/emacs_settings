@@ -945,3 +945,7 @@
  :config
  (setq k8s-search-documentation-browser-function 'browse-url-firefox)
  :hook (k8s-mode . yas-minor-mode))
+
+;; Use with M-x kubedoc
+(use-package kubedoc
+  :ensure t)
