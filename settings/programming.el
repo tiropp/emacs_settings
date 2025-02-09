@@ -90,8 +90,6 @@
   :ensure t)
 (use-package with-editor
   :ensure t)
-(use-package git-commit
-  :ensure t)
 (use-package magit-popup
   :ensure t)
 (use-package magit-lfs
