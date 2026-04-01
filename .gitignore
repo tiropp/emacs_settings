@@ -1,2 +1,23 @@
 # emacs
 *~
+*.elc
+
+recentf
+tramp
+network-security.data
+bookmarks
+.dap-breakpoints
+.lsp-session-v1
+
+url/
+transient/
+meghanada/
+irony/
+eshell/
+elpa/
+eln-cache/
+anaconda-mode/
+.extension/
+.cache/
+
+
