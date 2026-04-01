@@ -117,3 +117,8 @@
 ;; WEB ;;
 ;;;;;;;;;
 (load-file "~/.emacs.d/settings/web.el")
+
+;;;;;;;;;
+;; UML ;;
+;;;;;;;;;
+(load-file "~/.emacs.d/settings/uml.el")
