@@ -69,8 +69,7 @@
 
    :config
    (set-default 'magit-stage-all-confirm nil)
-   (add-hook 'magit-mode-hook 'magit-load-config-extensions)
-   
+
    ;; full screen magit-status
    (defadvice magit-status (around magit-fullscreen activate)
      (window-configuration-to-register :magit-fullscreen)
