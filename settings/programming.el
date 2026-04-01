@@ -105,6 +105,28 @@
 	)
   )
 
+;;;;;;;;;;;;;;;
+;; Mercurial ;;
+;;;;;;;;;;;;;;;
+;; vc-hgcmd is "only" a backend to the VC "system".
+;; Short cut prefix is C-x v
+;; (use-package vc-hgcmd
+;;   :ensure t
+;;   :config
+;;   ;; Make sure Hg is removed from vc backends and instead Hgcmd is added
+;;   (setq vc-handled-backends (append (remove 'Hg vc-handled-backends) '(Hgcmd))))
+(use-package monky
+  :ensure t
+  :config
+  ;; Only use one hg process to speed up operations
+  (setq monky-process-type 'cmdserver)
+
+  ;; Override default key combination C-c C-c with C-c # (same as in magit) to
+  ;; finish commit when in log buffer. (This is needed because C-c C-c is
+  ;; already used.
+  (define-key monky-log-edit-mode-map (kbd "C-c #") 'monky-log-edit-commit)
+  )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Highlight-Numbers ;;
