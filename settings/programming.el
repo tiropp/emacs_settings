@@ -813,6 +813,19 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.gsl\\'" . glsl-mode)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; FLYMAKE WITH CMAKE ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package cpputils-cmake
+;;   :ensure t
+;;   :hook ((c-mode-common-hook) .
+;; 	 (lambda ()
+;; 	   (if (derived-mode-p 'c-mode 'c++-mode)
+;; 	       (cppcm-reload-all))))
+;;   ;;  :config
+;;   ;;  (setq cppcm-extra-preprocss-flags-from-user '("-I/usr/src/linux/include" "-DNDEBUG"))
+;;   )
+
 
 ;;;;;;;;;;
 ;; RUST ;;
